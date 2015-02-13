@@ -75,15 +75,31 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="Capacity.h" />
+    <ClInclude Include="Damage.h" />
+    <ClInclude Include="LifePoint.h" />
+    <ClInclude Include="Regen.h" />
+    <ClInclude Include="Speed.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="WeaponRange.h" />
+    <ClInclude Include="WeaponSpeed.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Battle_Project_Kevin_Pierre.cpp" />
+    <ClCompile Include="Capacity.cpp" />
+    <ClCompile Include="Damage.cpp" />
+    <ClCompile Include="LifePoint.cpp" />
+    <ClCompile Include="Regen.cpp" />
+    <ClCompile Include="Speed.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="WeaponRange.cpp" />
+    <ClCompile Include="WeaponSpeed.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
