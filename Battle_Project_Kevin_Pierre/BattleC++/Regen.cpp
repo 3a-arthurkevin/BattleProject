@@ -14,10 +14,10 @@ Regen::Regen(void)
 
 void Regen::Upgrade()
 {
-	this->_value = this->_level * 3;
+	this->_value = this->_level * 3.f;
 }
 
 void Regen::DownGrade()
 {
-	this->_value = this->_level * 3;
+	this->_value = this->_level * 3.f;
 }

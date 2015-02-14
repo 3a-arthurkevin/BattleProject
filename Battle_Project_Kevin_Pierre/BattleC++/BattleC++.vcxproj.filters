@@ -13,90 +13,120 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Capacities">
+      <UniqueIdentifier>{4c6db29f-f7c5-40f0-a611-ed519150bdb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Others">
+      <UniqueIdentifier>{c3b40afa-f4ee-4961-95c5-2f603a4163d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Visual">
+      <UniqueIdentifier>{316ed491-3ced-4d45-b88d-99cb68f6f686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Capacites">
+      <UniqueIdentifier>{9878a503-e06e-49c4-b96d-1d50f68aafbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Others">
+      <UniqueIdentifier>{3786d89f-7e70-46c0-bcff-5f62a602323c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Visual">
+      <UniqueIdentifier>{040835c1-ba84-4caa-8209-e3a18f7db9c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Capacities\Base">
+      <UniqueIdentifier>{ea23649d-2c47-4198-81bf-1857e18225a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Capacites\Base">
+      <UniqueIdentifier>{806e33d2-4fb6-48b5-a667-c713b1f99945}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Capacity.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Armor.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="Damage.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="IA.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="LifePoint.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="Regen.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="Speed.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="WeaponRange.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="WeaponSpeed.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
-    <ClInclude Include="Armor.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Unit.h">
+      <Filter>Fichiers d%27en-tête\Others</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Fichiers d%27en-tête\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Fichiers d%27en-tête\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="Army.h">
+      <Filter>Fichiers d%27en-tête\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Capacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Fichiers d%27en-tête\Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="Damage.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="LifePoint.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="Regen.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="Speed.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponRange.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponSpeed.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Fichiers sources\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Fichiers sources\Others</Filter>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Visual</Filter>
     </ClCompile>
     <ClCompile Include="BattleC++.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Army.cpp">
+      <Filter>Fichiers sources\Others</Filter>
+    </ClCompile>
     <ClCompile Include="Capacity.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Capacites\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Damage.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="IA.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LifePoint.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Regen.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Speed.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponRange.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponSpeed.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="AI.cpp">
+      <Filter>Fichiers sources\Others</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

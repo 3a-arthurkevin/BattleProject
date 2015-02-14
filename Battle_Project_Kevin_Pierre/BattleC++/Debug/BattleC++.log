@@ -1,14 +1,15 @@
-﻿La génération a démarré 14/02/2015 13:50:00.
-     1>Projet "C:\Users\Kevin\Desktop\BattleC++\BattleC++\BattleC++.vcxproj" sur le nœud 2 (Build cible(s)).
+﻿La génération a démarré 14/02/2015 14:19:56.
+     1>Projet "C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\BattleC++\BattleC++.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt LifePoint.cpp
-         LifePoint.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattleC++.cpp
+         BattleC++.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Desktop\BattleC++\Debug\BattleC++.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kevin\Desktop\BattleC++\Debug\BattleC++.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Desktop\BattleC++\Debug\BattleC++.lib" /MACHINE:X86 Debug\Armor.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.lib" /MACHINE:X86 Debug\Armor.obj
+         Debug\Army.obj
          Debug\BattleC++.obj
          Debug\Capacity.obj
          Debug\Damage.obj
-         Debug\IA.obj
+         Debug\AI.obj
          Debug\LifePoint.obj
          Debug\Point.obj
          Debug\Regen.obj
@@ -17,9 +18,9 @@
          Debug\Unit.obj
          Debug\WeaponRange.obj
          Debug\WeaponSpeed.obj
-         BattleC++.vcxproj -> C:\Users\Kevin\Desktop\BattleC++\Debug\BattleC++.exe
-     1>Génération du projet "C:\Users\Kevin\Desktop\BattleC++\BattleC++\BattleC++.vcxproj" terminée (Build cible(s)).
+         BattleC++.vcxproj -> C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.exe
+     1>Génération du projet "C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\BattleC++\BattleC++.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:00.85
+Temps écoulé 00:00:01.14
