@@ -4,10 +4,12 @@
 #include <iostream>
 #include <cmath>
 
-class Rectangle;
-
 class Point
 {
+	private:
+		float _x;
+		float _y;
+
     public:
 		~Point(void);
 
@@ -39,10 +41,6 @@ class Point
 
         Point & operator/=(float value);
         Point operator/(float value) const;
-
-    private:
-        float _x;
-        float _y;
 };
 
 std::ostream & operator << (std::ostream & out, const Point & point);

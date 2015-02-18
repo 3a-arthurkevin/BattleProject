@@ -8,17 +8,45 @@ WeaponSpeed::~WeaponSpeed(void)
 WeaponSpeed::WeaponSpeed(void)
 	:Capacity()
 {
-	this->Upgrade();
+	this->ComputeValue();
 	this->_value = 0;
 }
 
+void WeaponSpeed::ComputeValue()
+{
+	this->_maxValue = 1000.f / (1 + this->_level);
+}
 
 void WeaponSpeed::Upgrade()
 {
-	this->_maxValue = 1000 / (1 + this->_level);
+	Capacity::Upgrade();
+	this->ComputeValue();
 }
 
 void WeaponSpeed::DownGrade()
 {
-	this->_maxValue = 1000 / (1 + this->_level);
+	Capacity::DownGrade();
+	this->ComputeValue();
+}
+
+void WeaponSpeed::SetLevel(int level)
+{
+	Capacity::SetLevel(level);
+	this->ComputeValue();
+}
+
+const float WeaponSpeed::GetMaxValue() const
+{
+	return this->_maxValue;
+}
+
+void WeaponSpeed::CoolDown()
+{
+	if (this->_value > 0)
+		--(this->_value);
+}
+
+void WeaponSpeed::WeaponUsed()
+{
+	this->_value = this->_maxValue;
 }

@@ -7,18 +7,29 @@ Armor::~Armor(void)
 Armor::Armor(void)
 	:Capacity()
 {
-	this->Upgrade();
+	this->ComputeValue();
 }
 
 
-
+void Armor::ComputeValue()
+{
+	this->_value = this->_level / 2.f;
+}
 
 void Armor::Upgrade()
 {
-	this->_value = this->_level * 2.f;
+	Capacity::Upgrade();
+	this->ComputeValue();
 }
 
-void  Armor::DownGrade()
+void Armor::DownGrade()
 {
-	this->_value = this->_level * 2.f;
+	Capacity::DownGrade();
+	this->ComputeValue();
+}
+
+void Armor::SetLevel(int level)
+{
+	Capacity::SetLevel(level);
+	this->ComputeValue();
 }

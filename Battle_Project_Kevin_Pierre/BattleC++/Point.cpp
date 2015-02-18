@@ -114,5 +114,5 @@ Point Point::operator/(float value) const
 
 std::ostream & operator << (std::ostream & out, const Point & point)
 {
-    return out << "Point data --> position(" << point.GetX() << ";" << point.GetY() << ")";
+    return out << "Point : Position (" << point.GetX() << " ; " << point.GetY() << ")";
 }

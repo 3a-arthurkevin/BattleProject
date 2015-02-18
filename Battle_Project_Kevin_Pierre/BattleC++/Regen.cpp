@@ -8,16 +8,29 @@ Regen::~Regen(void)
 Regen::Regen(void)
 	:Capacity()
 {
-	this->Upgrade();
+	this->ComputeValue();
 }
 
 
+void Regen::ComputeValue()
+{
+	this->_value = this->_level / 1000.f;
+}
+
 void Regen::Upgrade()
 {
-	this->_value = this->_level * 3.f;
+	Capacity::Upgrade();
+	this->ComputeValue();
 }
 
 void Regen::DownGrade()
 {
-	this->_value = this->_level * 3.f;
+	Capacity::DownGrade();
+	this->ComputeValue();
+}
+
+void Regen::SetLevel(int level)
+{
+	Capacity::SetLevel(level);
+	this->ComputeValue();
 }

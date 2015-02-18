@@ -79,10 +79,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionType.h" />
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Army.h" />
     <ClInclude Include="Capacity.h" />
-    <ClInclude Include="Damage.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="WeaponDamage.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="LifePoint.h" />
     <ClInclude Include="Point.h" />
@@ -95,11 +98,13 @@
     <ClInclude Include="WeaponSpeed.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="BattleC++.cpp" />
     <ClCompile Include="Capacity.cpp" />
-    <ClCompile Include="Damage.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="WeaponDamage.cpp" />
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="LifePoint.cpp" />
     <ClCompile Include="Point.cpp" />

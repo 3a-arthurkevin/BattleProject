@@ -8,16 +8,29 @@ Speed::~Speed(void)
 Speed::Speed(void)
 	:Capacity()
 {
-	this->Upgrade();
+	this->_level = 0;
+	this->ComputeValue();
 }
 
+void Speed::ComputeValue()
+{
+	this->_value = 1.f + this->_level;
+}
 
 void Speed::Upgrade()
 {
-	this->_level = 1 + this->_level;
+	Capacity::Upgrade();
+	this->ComputeValue();
 }
 
 void Speed::DownGrade()
 {
-	this->_level = 1 + this->_level;
+	Capacity::DownGrade();
+	this->ComputeValue();
+}
+
+void Speed::SetLevel(int level)
+{
+	Capacity::SetLevel(level);
+	this->ComputeValue();
 }

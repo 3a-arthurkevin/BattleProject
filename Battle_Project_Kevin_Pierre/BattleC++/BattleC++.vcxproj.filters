@@ -37,15 +37,15 @@
     <Filter Include="Fichiers sources\Capacites\Base">
       <UniqueIdentifier>{806e33d2-4fb6-48b5-a667-c713b1f99945}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Enums">
+      <UniqueIdentifier>{dcc368b4-6e4d-43a1-a464-941db3995959}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h">
-      <Filter>Fichiers d%27en-tête\Capacities</Filter>
-    </ClInclude>
-    <ClInclude Include="Damage.h">
       <Filter>Fichiers d%27en-tête\Capacities</Filter>
     </ClInclude>
     <ClInclude Include="LifePoint.h">
@@ -84,12 +84,21 @@
     <ClInclude Include="AI.h">
       <Filter>Fichiers d%27en-tête\Others</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponDamage.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Fichiers d%27en-tête\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionType.h">
+      <Filter>Fichiers d%27en-tête\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Fichiers d%27en-tête\Others</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp">
-      <Filter>Fichiers sources\Capacites</Filter>
-    </ClCompile>
-    <ClCompile Include="Damage.cpp">
       <Filter>Fichiers sources\Capacites</Filter>
     </ClCompile>
     <ClCompile Include="LifePoint.cpp">
@@ -126,6 +135,15 @@
       <Filter>Fichiers sources\Capacites\Base</Filter>
     </ClCompile>
     <ClCompile Include="AI.cpp">
+      <Filter>Fichiers sources\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponDamage.cpp">
+      <Filter>Fichiers sources\Capacites</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Fichiers sources\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
       <Filter>Fichiers sources\Others</Filter>
     </ClCompile>
   </ItemGroup>

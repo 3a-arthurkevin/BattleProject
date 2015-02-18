@@ -8,15 +8,28 @@ WeaponRange::~WeaponRange(void)
 WeaponRange::WeaponRange(void)
 	:Capacity()
 {
-	this->Upgrade();
+	this->ComputeValue();
+}
+
+void WeaponRange::ComputeValue()
+{
+	this->_value = 10.f + (this->_level * 2.f);
 }
 
 void WeaponRange::Upgrade()
 {
-	this->_value = 10.f + (this->_level * 2.f);
+	Capacity::Upgrade();
+	this->ComputeValue();
 }
 
 void WeaponRange::DownGrade()
 {
-	this->_value = 10.f + (this->_level * 2.f);
+	Capacity::DownGrade();
+	this->ComputeValue();
+}
+
+void WeaponRange::SetLevel(int level)
+{
+	Capacity::SetLevel(level);
+	this->ComputeValue();
 }
