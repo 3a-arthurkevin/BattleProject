@@ -7,8 +7,7 @@ Action::~Action()
 Action::Action()
 {
 	this->_action = ActionType::None;
-	this->_location = Point();
-	this->_id = 0;
+	this->_id = -1;
 }
 
 
@@ -34,12 +33,18 @@ void Action::SetLocation(const Point & point)
 	this->_location.SetY(point.GetY());
 }
 
-const unsigned int Action::GetId() const
+void Action::SetLocation(const float x, const float y)
+{
+	this->_location.SetX(x);
+	this->_location.SetY(y);
+}
+
+int Action::GetId() const
 {
 	return this->_id;
 }
 
-void Action::SetId(unsigned id)
+void Action::SetId(int id)
 {
 	this->_id = id;
 }

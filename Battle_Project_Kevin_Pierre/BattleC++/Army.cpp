@@ -1,5 +1,6 @@
 #include "Army.h"
 
+//Destructor
 Army::~Army(void)
 {/*
 	unsigned int i;
@@ -10,6 +11,11 @@ Army::~Army(void)
 	*/
 }
 
+/*
+	First Constructor
+	Need the number of Unit in the army and the globalLevel for every Unit
+		--> Use the first constructor of Unit's class
+*/
 Army::Army(int nbUnit, int globalLevel)
 {
 	this->_units.reserve(nbUnit);
@@ -17,8 +23,15 @@ Army::Army(int nbUnit, int globalLevel)
 	
 	for (i = 0; i < nbUnit; ++i)
 		this->_units.push_back(new Unit(globalLevel));
+
+	this->_score = 0;
 }
 
+/*
+	Second Constructor
+	Copy the vector in parameter
+		--> Use the second constructor of Unit's class
+*/
 Army::Army(std::vector< Unit* > & units)
 {
 	unsigned int i;
@@ -35,14 +48,18 @@ Army::Army(std::vector< Unit* > & units)
 										units[i]->GetWeaponRange().GetLevel(),
 										units[i]->GetWeaponSpeed().GetLevel()));
 	}
+
+	this->_score = 0;
 }
 
-std::vector< Unit* > & Army::GetUnitsList()
+//Getter of _units
+std::vector< Unit* > Army::GetUnitsList()
 {
 	return this->_units;
 }
 
-Unit * Army::GetUnit(unsigned int id)
+//Return an unit from _units who has the id in parameter
+Unit & Army::GetUnit(int id)
 {
 	unsigned int indexUnit = 0;
 	unsigned int size = this->_units.size();
@@ -50,26 +67,30 @@ Unit * Army::GetUnit(unsigned int id)
 	while (indexUnit < size)
 	{
 		if (this->_units[indexUnit]->GetId() == id)
-			return (this->_units[indexUnit]);
+			return (*(this->_units[indexUnit]));
 
 		++indexUnit;
 	}
 
 	std::cout << "Error 404 - Unit with id " << id << " not found :(" << std::endl;
-	return nullptr;
 }
 
+//Return the size of the vector _units
 const int Army::Size() const
 {
 	return this->_units.size();
 }
 
-Unit * Army::GetNearestUnit(const Point & point) const
+/*
+	Functions returning the nearest and the farthest from a point
+	By look the distance between the point and the position of every units in _units
+*/
+Unit & Army::GetNearestUnit(const Point & point)
 {
 	if (this->_units.size() > 0)
 	{
-		Unit * nearestUnit = this->_units[0];
-		float smallestDistance = nearestUnit->GetPosition().Distance(point);
+		unsigned int indexNearestUnit = 0;
+		float smallestDistance = (*(this->_units[indexNearestUnit])).GetPosition().Distance(point);
 
 		unsigned int i;
 		unsigned int size = this->_units.size();
@@ -78,26 +99,23 @@ Unit * Army::GetNearestUnit(const Point & point) const
 		{
 			if (this->_units[i]->GetPosition().Distance(point) < smallestDistance)
 			{
-				nearestUnit = this->_units[i];
-				smallestDistance = nearestUnit->GetPosition().Distance(point);
+				indexNearestUnit = i;
+				smallestDistance = (*(this->_units[indexNearestUnit])).GetPosition().Distance(point);
 			}
 		}
 
-		return nearestUnit;
+		return *(this->_units[indexNearestUnit]);
 	}
 	
 	std::cout << "Error - No Unit in this army" << std::endl;
-	return nullptr;
-
-
 }
 
-Unit * Army::GetFarthestUnit(const Point& point) const
+Unit & Army::GetFarthestUnit(const Point & point)
 {
-	if (this->_units.size() < 0)
+	if (this->_units.size() > 0)
 	{
-		Unit * nearestUnit = this->_units[0];
-		float greatestDistance = nearestUnit->GetPosition().Distance(point);
+		unsigned int indexFarthestUnit = 0;
+		float greatestDistance = (*(this->_units[indexFarthestUnit])).GetPosition().Distance(point);
 
 		unsigned int i;
 		unsigned int size = this->_units.size();
@@ -106,82 +124,190 @@ Unit * Army::GetFarthestUnit(const Point& point) const
 		{
 			if (this->_units[i]->GetPosition().Distance(point) > greatestDistance)
 			{
-				nearestUnit = this->_units[i];
-				greatestDistance = nearestUnit->GetPosition().Distance(point);
+				indexFarthestUnit = i;
+				greatestDistance = (*(this->_units[indexFarthestUnit])).GetPosition().Distance(point);
 			}
 		}
 
-		return nearestUnit;
+		return *(this->_units[indexFarthestUnit]);
 	}
 
 	std::cout << "Error - No Unit in this army" << std::endl;
-	return nullptr;
 }
 
-Unit * Army::GetLowestUnit(int indexCapacity) const
+/*
+	Functions returning the lowest and the highest according to the parameter which represente the index of a Unit's capacity
+	By look the level of every units in _units
+*/
+Unit & Army::GetLowestUnit(int indexCapacity)
 {
-	if (this->_units.size() < 0)
+	if (this->_units.size() > 0)
 	{
-		Unit * lowestUnit = this->_units[0];
-		float lowestValue = (*lowestUnit)[indexCapacity].GetValue();
+		unsigned int indexLowestUnit = 0;
+		int lowestLevel = (*(this->_units[indexLowestUnit])).operator[](indexCapacity).GetLevel();
 
 		unsigned int i;
 		unsigned int size = this->_units.size();
 
 		for (i = 1; i < size; ++i)
 		{
-			if ( (*(this->_units[i]))[indexCapacity].GetValue() < lowestValue )
+			if ((*(this->_units[i]))[indexCapacity].GetLevel() < lowestLevel)
 			{
-				lowestUnit = this->_units[i];
-				lowestValue = (*lowestUnit)[indexCapacity].GetValue();
+				indexLowestUnit = i;
+				lowestLevel = (*(this->_units[indexLowestUnit])).operator[](indexCapacity).GetLevel();
 			}
 		}
-		return lowestUnit;
+		return *(this->_units[indexLowestUnit]);
 	}
 
 	std::cout << "Error - No Unit in this army" << std::endl;
-	return nullptr;
 }
 
-Unit * Army::GetHighestUnit(int indexCapacity) const
+Unit & Army::GetHighestUnit(int indexCapacity)
 {
-	if (this->_units.size() < 0)
+	if (this->_units.size() > 0)
 	{
-		Unit * highestUnit = this->_units[0];
-		float highestValue = (*highestUnit)[indexCapacity].GetValue();
+		unsigned int indexHighestUnit = 0;
+		int highestLevel = (*(this->_units[indexHighestUnit])).operator[](indexCapacity).GetLevel();
 
 		unsigned int i;
 		unsigned int size = this->_units.size();
 
 		for (i = 1; i < size; ++i)
 		{
-			if ( (*(this->_units[i]))[indexCapacity].GetValue() < highestValue )
+			if ((*(this->_units[i]))[indexCapacity].GetLevel() > highestLevel)
 			{
-				highestUnit = this->_units[i];
-				highestValue = (*highestUnit)[indexCapacity].GetValue();
+				indexHighestUnit = i;
+				highestLevel = (*(this->_units[indexHighestUnit])).operator[](indexCapacity).GetLevel();
 			}
 		}
-		return highestUnit;
+		return *(this->_units[indexHighestUnit]);
 	}
 
 	std::cout << "Error - No Unit in this army" << std::endl;
-	return nullptr;
 }
 
+/*
+	Looking for a unit who is have a LifePoint's value equal 0
+		If an unit !IsAlive 
+			--> removing this unit from the vector _units
+*/
 void Army::Purge()
 {
 	auto iterator = std::begin(this->_units);
-	unsigned int size = this->_units.size();
 
 	while (iterator != std::end(this->_units))
 	{
-		if (! ((*iterator)->IsAlive()) )
+		if (!((*iterator)->IsAlive()))
+		{
 			this->_units.erase(iterator);
+			break;
+		}
 		else
 			++iterator;
 	}
 }
 
+//Apply Refresh() on all units --> see class Unit (function called after the end of a turn)
+void Army::Refresh()
+{
+	auto iterator = std::begin(this->_units);
+
+	while (iterator != std::end(this->_units))
+	{
+		(*iterator)->Refresh();
+		++iterator;
+	}
+}
+
+//Replace one unit by an other one generated randomly
+void Army::mutate()
+{
+	//Choice between changing one unit and changing a part of army's units randomly
+	int choice = rand() % 2;
+
+	unsigned int indexUnit;
+
+	//Changing just one unit
+	if (choice == 0)
+	{
+		indexUnit = rand() % this->Size();
+
+		int globalLevel = this->GetUnitsList()[indexUnit]->GetLevel();
+
+		this->GetUnitsList()[indexUnit]->Seppuku();
+		this->Purge();
+		this->GetUnitsList().push_back(new Unit(globalLevel));
+	}
+	//Mutating a part of the army
+	else
+	{
+		unsigned int size = this->Size();
+		unsigned int sizeFactor = 4;
+
+		unsigned int nbUnitToMutate = size / 4; // --> mutate 1/4 of the army
+		unsigned int i;
+
+		for (i = 0; i < nbUnitToMutate; ++i)
+		{
+			indexUnit = rand() % size;
+			this->_units[indexUnit]->Mutate();
+		}
+	}
+}
+
+/*
+	Mutation bewteen two Army --> Returning a new army composed with :
+		--> a part of armyA's units
+		--> a part of armyB's units
+		--> units randomly generated to fill the empty space
+*/
+Army Army::operator * (const Army & army) const
+{
+	std::vector< Unit* > newUnits;
+
+	unsigned int indexUnitA;
+	unsigned int indexUnitB;
+
+	unsigned int sizeFactor = 3;
+	unsigned int size = this->Size();
+
+	unsigned int sizeA = size / sizeFactor;
+	unsigned int sizeB = size / sizeFactor;
+	unsigned int leftover = size - (sizeA + sizeB);
+
+	unsigned int i;
+
+	for (i = 0; i < sizeA; ++i)
+	{
+		indexUnitA = rand() % this->Size();
+
+		newUnits.push_back(this->_units[indexUnitA]);
+	}
+
+	for (i = 0; i < sizeB; ++i)
+	{
+		indexUnitB = rand() % army.Size();
+
+		newUnits.push_back(this->_units[indexUnitB]);
+	}
+
+	for (i = 0; i < leftover; ++i)
+	{
+		indexUnitA = rand() % this->Size();
+		indexUnitB = rand() % army.Size();
+
+		Unit newUnit = (*(this->_units[indexUnitA])) * (*(army._units[indexUnitB]));
+
+		newUnits.push_back(new Unit(newUnit));
+	}
+
+	return Army(newUnits);
+}
+
+/*
+	Overinding of the comparisons operators for ordering
+*/
 bool Army::operator < (const Army & army) const
 {
 	return (this->Size() < army.Size());
@@ -212,74 +338,22 @@ bool Army::operator != (const Army & army) const
 	return (*this < army || *this > army);
 }
 
-void Army::mutate()
+
+/*
+	Getter of the attribute _score
+	Setters of the attribute _score
+*/
+int Army::GetScore() const
 {
-	//Choice between changing one unit and changing a part of army's units randomly
-	int choice = rand() % 2;
-
-	unsigned int indexUnit;
-
-	if (choice == 0)
-	{
-		indexUnit = rand() % this->Size();
-
-		*(this->_units[indexUnit]) = Unit(this->_units[indexUnit]->GetLevel());
-	}
-	else
-	{
-		unsigned int size = this->Size();
-		unsigned int sizeFactor = 4; 
-		
-		unsigned int nbUnitToMutate = size / 4; // --> mutate 1/4 of the army
-		unsigned int i;
-
-		 for (i = 0; i < nbUnitToMutate; ++i)
-		 {
-			 indexUnit = rand() % size;
-			 this->_units[indexUnit]->Mutate();
-		 }
-	}
+	return this->_score;
 }
 
-Army Army::operator * (const Army & army) const
+void Army::SetScore(const int score)
 {
-	std::vector< Unit* > newUnits;
+	this->_score = score;
+}
 
-	unsigned int indexUnitA;
-	unsigned int indexUnitB;
-
-	unsigned int sizeFactor = 3;
-	unsigned int size = this->Size();
-
-	unsigned int sizeA = size / sizeFactor;
-	unsigned int sizeB = size / sizeFactor;
-	unsigned int leftover = size - (sizeA + sizeB);
-
-	unsigned int i;
-
-	for (i = 0; i < sizeA; ++i)
-	{
-		indexUnitA = rand() % this->Size();
-		
-		newUnits.push_back(this->_units[indexUnitA]);
-	}
-
-	for (i = 0; i < sizeB; ++i)
-	{
-		indexUnitB = rand() % army.Size();
-
-		newUnits.push_back(this->_units[indexUnitB]);
-	}
-
-	for (i = 0; i < leftover; ++i)
-	{
-		indexUnitA = rand() % this->Size();
-		indexUnitB = rand() % army.Size();
-
-		Unit newUnit = (*(this->_units[indexUnitA])) * (*(army._units[indexUnitB]));
-
-		newUnits.push_back(new Unit(newUnit));
-	}
-
-	return Army(newUnits);
+void Army::AddScore(const int scoreToAdd)
+{
+	this->_score += scoreToAdd;
 }

@@ -2,24 +2,37 @@
 #define ARMOR_H
 
 #include "capacity.h"
-#include <iostream>
+
+/*
+	Classe that inherits from Capacity
+*/
 
 class Armor : public Capacity
 {
 	public:
-		//Destructeur
+		//Destructor
 		~Armor(void);
 
-		//Constructeur
+		//Constructor
 		Armor(void);
 
-		//Redéfiniton de la fonction dans la classe mère
+		/*
+			Compute _value according to _level
+			Overriding of function from base class
+		*/
 		void ComputeValue();
 
-		//Fonction de la classe mère avec ajout de code de la classe fille
+		/*
+			Incrementation and Decrementation of _level
+			Functions using the definition in base class and adding its own logic after (for (re)compute _value)
+		*/
 		void Upgrade();
 		void DownGrade();
 
+		/*
+			Setter of _level
+			Function using the definition in base class and adding its own logic after (for (re)compute _value)
+		*/
 		void SetLevel(int level);
 };
 

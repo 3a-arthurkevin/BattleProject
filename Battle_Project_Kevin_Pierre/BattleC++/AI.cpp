@@ -9,57 +9,74 @@ AI::AI(void)
 	
 }
 
+/*
+	Functor returning what a Unit from armyA will do against armyB according to Unit's Ai code
+
+	If unit can shoot
+		If an enemy is in weapon range (according to its Ai code)
+			Get the vector of all enemies in weapon range and get the enemy to shoot according to the unit's Ai code
+			Return an Action with actionType::Shoot with the id of the enemy
+		Else (no enemy in weapon range)
+			Get the nearest enemy according to unit's Ai code
+			Return Action with ActionType::Move with the position of the enemy / id of the enemy
+	Else (can't shoot)
+		Get the nearest enemy from Unit
+		If Unit is in weapon range of the nearst enemy
+			Move to the opposite direction from the enemy
+			return Action with actionType::Flee and position of the enemy and id of the enemy
+		Else (not in weapon range)
+			Return action with ActionType::None
+*/
 const Action AI::operator()(Unit & unit, Army & armyA, Army & armyB) const
 {
-	
 	Action actionToDo;
+	actionToDo.SetLocation(unit.GetPosition());
 	
 	std::string firstChar(1, unit.GetAiCode()[0]);
 	std::string secondChar(1, unit.GetAiCode()[1]);
-	unsigned int secondCharInt = std::atoi(&(unit.GetAiCode()[1]));
+	unsigned int secondCharInt = std::atoi(&(unit.GetAiCode()[1])); 
 
 	//Check is unit can shoot
 	if (unit.CanShoot())
 	{
-		//Check if at least one enemy is at shooting range
-		if (this->EnemyInRange(unit.GetWeaponRange().GetValue(), unit.GetPosition(), armyB))
+		//Check if at least one enemy is at weapon range
+		if (this->EnemyInRange(unit.GetWeaponRange().GetValue(), unit.GetPosition(), armyB.GetUnitsList()))
 		{
 			actionToDo.SetAction(ActionType::Shoot);
 
-			std::vector< Unit* > enemiesInRange;
-			this->GetEnemiesInRange(enemiesInRange, unit.GetWeaponRange().GetValue(), unit.GetPosition(), armyB);
+			std::vector<Unit*> enemiesInRange = this->GetEnemiesInRange(unit.GetWeaponRange().GetValue(), unit.GetPosition(), armyB.GetUnitsList());
 
-			//Applying action according to unit's ai code
+			//Set Action according to unit's ai code
 			if (firstChar.compare("L") == 0)
 			{
-
-				if (secondChar.compare("D"))
+				if (secondChar.compare("D") == 0)
 				{
-					Unit enemyToShoot = this->GetNearestInRange(unit.GetWeaponRange().GetValue(), unit.GetPosition(), enemiesInRange);
+					Unit enemyToShoot = this->GetNearestEnemy(unit.GetPosition(), enemiesInRange);
 					actionToDo.SetId(enemyToShoot.GetId());
 					actionToDo.SetLocation(enemyToShoot.GetPosition());
 				}
 				else if (secondCharInt >= 0 && secondCharInt <= 6)
 				{
-					Unit enemyToShoot = this->GetLowestInRange(secondCharInt, enemiesInRange);
+					Unit enemyToShoot = this->GetLowestEnemy(secondCharInt, enemiesInRange);
 					actionToDo.SetId(enemyToShoot.GetId());
 					actionToDo.SetLocation(enemyToShoot.GetPosition());
 				}
 				else
 					std::cout << "Error - 2nd char of ai code unknown" << std::endl;
-				
 			}
 			else if (firstChar.compare("H") == 0)
 			{
-				if (secondChar.compare("D"))
+				if (secondChar.compare("D") == 0)
 				{
-					Unit enemyToShoot = this->GetFarthestInRange(unit.GetWeaponRange().GetValue(), unit.GetPosition(), enemiesInRange);
+					Unit enemyToShoot = this->GetFarthestEnemy(unit.GetPosition(), enemiesInRange);
 					actionToDo.SetId(enemyToShoot.GetId());
 					actionToDo.SetLocation(enemyToShoot.GetPosition());
 				}
 				else if (secondCharInt >= 0 && secondCharInt <= 6)
 				{
-					Unit enemyToShoot = this->GetHighestInRange(secondCharInt, enemiesInRange);
+					Unit enemyToShoot = this->GetHighestEnemy(secondCharInt, enemiesInRange);
+					actionToDo.SetId(enemyToShoot.GetId());
+					actionToDo.SetLocation(enemyToShoot.GetPosition());
 				}
 				else
 					std::cout << "Error - 2nd char of ai code unknown" << std::endl;
@@ -67,146 +84,199 @@ const Action AI::operator()(Unit & unit, Army & armyA, Army & armyB) const
 			else
 				std::cout << "Error - 1st char of ai code unknown" << std::endl;
 		}
-		//S'apporcher
+		//Moving to the nearest enemy
 		else
 		{
+			Unit nearestEnemy = armyB.GetNearestUnit(unit.GetPosition());
 			actionToDo.SetAction(ActionType::Move);
 
-			std::vector< Unit* > enemiesInRange;
-			this->GetEnemiesInRange(enemiesInRange, unit.GetSpeed().GetValue(), unit.GetPosition(), armyB);
-			Unit nearestEnemy = this->GetNearestInRange(unit.GetSpeed().GetValue(), unit.GetPosition(), enemiesInRange);
-			actionToDo.SetLocation(nearestEnemy.GetPosition());
+			actionToDo.SetId(nearestEnemy.GetId());
+
+			float distanceBetweenUnits = unit.GetPosition().Distance(nearestEnemy.GetPosition());
+
+			if (distanceBetweenUnits > 1.f || distanceBetweenUnits < -1.f)
+			{
+				float k = (unit.GetSpeed().GetValue() / distanceBetweenUnits);
+				Point pUnit(unit.GetPosition());
+				Point pEnemy(nearestEnemy.GetPosition());
+
+				Point directionalVector(pEnemy - pUnit);
+
+				actionToDo.SetLocation(unit.GetPosition() + (directionalVector * k));
+			}
 		}
 	}
-	//Sinon fuite
+	//Flee
 	else
 	{
 		actionToDo.SetAction(ActionType::Flee);
 
-		std::vector< Unit* > enemiesInRange;
-		this->GetEnemiesInRange(enemiesInRange, unit.GetSpeed().GetValue(), unit.GetPosition(), armyB);
-		Unit nearestEnemy = *(armyB.GetFarthestUnit(unit.GetPosition()));
-		actionToDo.SetLocation(nearestEnemy.GetPosition());
+		Unit nearestEnemy = armyB.GetNearestUnit(unit.GetPosition());
 
-		float k = (unit.GetSpeed().GetValue() / unit.GetPosition().Distance(nearestEnemy.GetPosition()));
-		
-		Point pA(unit.GetPosition());
-		Point pB(nearestEnemy.GetPosition());
-		Point directionalVector = (pB - pA);
+		if ((nearestEnemy.GetPosition().Distance(unit.GetPosition())) < nearestEnemy.GetWeaponRange().GetValue())
+		{
+			float distanceBetweenUnits = unit.GetPosition().Distance(nearestEnemy.GetPosition());
 
-		actionToDo.SetLocation(directionalVector * -k);
+			if (distanceBetweenUnits > 1.f || distanceBetweenUnits < -1.f)
+			{
+				float k = (unit.GetSpeed().GetValue() / distanceBetweenUnits);
+				Point pUnit(unit.GetPosition());
+				Point pEnemy(nearestEnemy.GetPosition());
+
+				Point directionalVector(pEnemy - pUnit);
+
+				actionToDo.SetLocation(unit.GetPosition() + (directionalVector * -k));
+			}
+		}
 	}
 	
 	return actionToDo;
 }
 
-bool AI::EnemyInRange(const float range, const Point & point, Army & armyB) const
+/*
+	Check if an enemy from the other army is in the range from a point
+		--> range can be the Speed or the WeaponRange'value of a Unit
+		--> point is the position of the Unit
+		--> armyB is the Army, Unit has to defeat
+	Return true if an enemy is in range
+	else return false
+*/
+bool AI::EnemyInRange(const float range, const Point & point, std::vector<Unit*> & unitsB) const
 {
 	Circle circlularRange(point, range);
 
 	unsigned int indexArmyB;
-	unsigned int sizeArmyB = armyB.Size();
+	unsigned int sizeArmyB = unitsB.size();
 
 	for (indexArmyB = 0; indexArmyB < sizeArmyB; ++indexArmyB)
 	{
-		if (circlularRange.Include( (armyB.GetUnitsList()[indexArmyB])->GetPosition()))
+		if (circlularRange.Include(unitsB[indexArmyB]->GetPosition()))
 			return true;
 	}
 	return false;
 }
 
-void AI::GetEnemiesInRange(std::vector< Unit* > & enemiesInRange, float range, const Point & point, Army & armyB) const
+/*
+	Return a vector of Unit* containing all the enemies in the range a Unit's range from its position
+		--> range can be the Speed or the WeaponRange'value of a Unit
+		--> point is the position of the Unit
+		--> unitsB is the vector of Units to defeat
+*/
+std::vector<Unit*> AI::GetEnemiesInRange(float range, const Point & point, std::vector<Unit*> & unitsB) const
 {
+	std::vector<Unit*> enemiesInRange;
 	Circle circlularRange(point, range);
 
 	unsigned int indexArmyB;
-	unsigned int sizeArmyB = armyB.Size();
+	unsigned int sizeArmyB = unitsB.size();
 
 	for (indexArmyB = 0; indexArmyB < sizeArmyB; ++indexArmyB)
 	{
-		if (circlularRange.Include((*armyB.GetUnitsList()[indexArmyB]).GetPosition()))
-			enemiesInRange.push_back(armyB.GetUnitsList()[indexArmyB]);
+		if (circlularRange.Include(unitsB[indexArmyB]->GetPosition()))
+			enemiesInRange.push_back(unitsB[indexArmyB]);
 	}
+
+	return enemiesInRange;
 }
 
-Unit & AI::GetNearestInRange(float range, const Point & point, const std::vector< Unit* > & enemiesInRange) const
+/*
+	Return the nearest enemy from a Unit's position
+		--> point is the position of the Unit
+		--> unitsB is the vector of Units to defeat
+*/
+Unit & AI::GetNearestEnemy(const Point & point, std::vector<Unit*> & unitsB) const
 {
-	Unit * nearestUnit = enemiesInRange[0];
-	float shortestDistance = point.Distance(nearestUnit->GetPosition());
+	int indexNearest = 0;
+	float shortestDistance = point.Distance(unitsB[indexNearest]->GetPosition());
 
 	unsigned int index;
-	unsigned int size = enemiesInRange.size();
+	unsigned int size = unitsB.size();
 
 	for (index = 1; index < size; ++index)
 	{
-		if (point.Distance((enemiesInRange[index])->GetPosition()) < shortestDistance)
+		if (point.Distance((unitsB[index])->GetPosition()) < shortestDistance)
 		{
-			nearestUnit = enemiesInRange[index];
-			shortestDistance = point.Distance(nearestUnit->GetPosition());
+			indexNearest = index;
+			shortestDistance = point.Distance(unitsB[indexNearest]->GetPosition());
 		}
 	}
-	return *nearestUnit;
+	return *(unitsB[indexNearest]);
 }
 
-Unit & AI::GetFarthestInRange(const float range, const Point & point, const std::vector< Unit* > & enemiesInRange) const
+/*
+	Return the farthest Units enemy from Unit's position
+		--> point is the position of the Unit
+		--> unitsB is the vector of Units to defeat
+*/
+Unit & AI::GetFarthestEnemy(const Point & point, std::vector<Unit*> & unitsB) const
 {
-	Unit * farthestUnit = enemiesInRange[0];
-	
-	float longestDistance = point.Distance(farthestUnit->GetPosition());
+	int indexFarthest = 0;
+	float longestDistance = point.Distance(unitsB[indexFarthest]->GetPosition());
 
 	unsigned int index;
-	unsigned int size = enemiesInRange.size();
+	unsigned int size = unitsB.size();
 
 	for (index = 1; index < size; ++index)
 	{
-		if (point.Distance((enemiesInRange[index])->GetPosition()) > longestDistance)
+		if (point.Distance((unitsB[index])->GetPosition()) > longestDistance)
 		{
-			farthestUnit = enemiesInRange[index];
-			longestDistance = point.Distance(farthestUnit->GetPosition());
+			indexFarthest = index;
+			longestDistance = point.Distance(unitsB[indexFarthest]->GetPosition());
 		}
 	}
-	return *farthestUnit;
+	return *(unitsB[indexFarthest]);
 }
 
-Unit & AI::GetLowestInRange(unsigned int indexCapacity, std::vector< Unit* > enemiesInRange) const
+/*
+	Return the enemy with the lowest value of a specific capacity
+		--> indexCapacity is the index of the capacity to check (checking by using the overrided operator [] in see class Unit)
+		--> unitsB is the vector of Units to defeat
+*/
+Unit & AI::GetLowestEnemy(unsigned int indexCapacity, std::vector<Unit*> & unitsB) const
 {
-	Unit * lowestUnit = enemiesInRange[0];
-	float lowestValue = (*lowestUnit)[indexCapacity].GetValue();
+	int indexLowest = 0;
+	float lowestValue = unitsB[indexLowest]->operator[](indexCapacity).GetValue();
 
 	unsigned int index;
-	unsigned int size = enemiesInRange.size();
+	unsigned int size = unitsB.size();
 
 	for (index = 1; index < size; ++index)
 	{
-		if ((*(enemiesInRange[index]))[indexCapacity].GetValue() < lowestValue)
+		if (unitsB[index]->operator[](indexCapacity).GetValue() < lowestValue)
 		{
-			lowestUnit = enemiesInRange[index];
-			lowestValue = (*lowestUnit)[indexCapacity].GetValue();
+			indexLowest = index;
+			lowestValue = unitsB[indexLowest]->operator[](indexCapacity).GetValue();
 		}
 	}
-	return *lowestUnit;
+	return *(unitsB[indexLowest]);
 }
 
-Unit & AI::GetHighestInRange(unsigned int indexCapacity, std::vector< Unit* > enemiesInRange) const
+/*
+	Return the enemy with the highest value of a specific capacity
+		--> indexCapacity is the index of the capacity to check (checking by using the overrided operator [] in see class Unit)
+		--> unitsB is the vector of Units to defeat
+*/
+Unit & AI::GetHighestEnemy(unsigned int indexCapacity, std::vector<Unit*> & unitsB) const
 {
-	Unit * highestUnit = enemiesInRange[0];
-	float highestValue = (*highestUnit)[indexCapacity].GetValue();
+	int indexHighest = 0;
+	float highestValue = unitsB[indexHighest]->operator[](indexCapacity).GetValue();
 
 	unsigned int index;
-	unsigned int size = enemiesInRange.size();
+	unsigned int size = unitsB.size();
 
 	for (index = 1; index < size; ++index)
 	{
-		if ((*(enemiesInRange[index]))[indexCapacity].GetValue() > highestValue)
+		if (unitsB[index]->operator[](indexCapacity).GetValue() > highestValue)
 		{
-			highestUnit = enemiesInRange[index];
-			highestValue = (*highestUnit)[indexCapacity].GetValue();
+			indexHighest = index;
+			highestValue = unitsB[indexHighest]->operator[](indexCapacity).GetValue();
 		}
 	}
-	return *highestUnit;
+	return *(unitsB[indexHighest]);
 }
 
-const std::string AI::GetRandomIaCode()
+//Return a randomly generated Ai code for a unit
+const std::string AI::GetRandomAiCode()
 {
 	int indexFirstChar = rand() % firstCharVector.size();
 	int indexSecondChar = rand() % secondCharVector.size();

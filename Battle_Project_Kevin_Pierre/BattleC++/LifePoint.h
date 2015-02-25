@@ -3,36 +3,66 @@
 
 #include "capacity.h"
 
+/*
+	Classe that inherits from Capacity
+*/
+
 class LifePoint  : 
 	public Capacity
 {
 	private :
-		//Attribut repésentant la valeur maximal des points de vie
-		//La valeur des points de vie courants sont dans la classe mère --> _value
+		/*
+			Attribute used to save the max LifePoint value
+				--> Current lifePoint value is the attribute _value in base class
+		*/
 		float _maxValue;
 
 	public:
-		//Destructeur
+		//Destructor
 		~LifePoint(void);
 
-		//Constructeur
+		//Constructor
 		LifePoint(void);
 
-		//Redéfiniton des la fonction dans la classe mère
+		/*
+			Compute _maxValue according to _level
+			Overriding of function from base class
+		*/
 		void ComputeValue();
 
-		//Fonction de la classe mère avec ajout de code de la classe fille
+		/*
+			Incrementation and Decrementation of _level
+			Functions using the definition in base class and adding its own logic after (for (re)compute _maxValue)
+		*/
 		void Upgrade();
 		void DownGrade();
 
+		/*
+			Setter of _level
+			Function using the definition in base class and adding its own logic after (for (re)compute _maxValue)
+		*/
 		void SetLevel(int level);
 
-		//Getters et Setters  
+		//Getter of _maxValue
 		const float GetMaxValue() const;
 
-		//Fonctions ajoutant et enlevant de la vie
+		/*
+			Function adding life points to _value (according to the unit's regen capacity value --> see Unit class)
+				--> _value has to be smaller or equal to _maxValue
+		*/
 		void RegenLife(float regen);
+
+		/*
+			Function removing life points to _value (according to an enemy's weapon damage value --> see Unit and Army class)
+			--> _value has to be smaller or equal to _maxValue
+		*/
 		void ApplyDamage(float damage);
+
+		/*
+			_value = _maxValue 
+			(used when Unit constructor id called in the case when he has some level its LifePoint's capacity --> see Unit class constructor)
+		*/
+		void RegenMax();
 };
 
 #endif

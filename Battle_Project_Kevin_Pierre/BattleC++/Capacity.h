@@ -2,47 +2,53 @@
 #define CAPACITY_H
 
 /*
-	Classe abstraite car il y a au moins une fonction vituelle pure --> Upgrade / DownGrade
-		Donc On ne peut pas instancier ni passer en paramètre ni retourner un Capacity !!!
-		(Slide 26 cours)
+	This class will be use as base class for inheritance of capacities (Speed, LifePoint, etc...)
 */
 
 class Capacity
 {
+
 	protected:
 		/*
-			Attributs
+			Class attributes
 		*/
 
-		//Attributs représentant respectivement le niveau et la valeur d'une capacité
-		int _level;
-		float _value;
+		int _level;		// Level of the capacity
+		float _value;	// Value of the capacity
 
 	public:
 		/*
-			Fonctions
+			Functions
 		*/
 
-		//Desctructeur
+		//Desctructor
 		~Capacity(void);
 
-		//Constructeur
+		//Constructor
 		Capacity(void);
 
-		//Fonction qui effectuera le calcul de la valeur d'une capacité
-			//--> Virtual car implémentation dans les classes dérivées (non virtuel pur pour pouvoir redéfinir opérateur dans Unit --> accesseur capacities avec [])
+		/*
+			Compute _value according to a formula (normally used when _level changed)
+				--> Virtual as the formula will be defined in the sub class
+				--> not a pure Virtual as we will use this class in Unit Class (See Operator[] overriding in Unit class) 
+		*/
 		virtual void ComputeValue();
 
-		//Fonctions incrémentant et décrementant le niveau réspectivement
-		void Upgrade();
-		void DownGrade();
+		/*
+			Functions that increment or decremente the capacity's level and recompute the value according to the new level affected
+				--> Virtual because these 2 functions will be completed in Capacity's sub classes by using the existing code and adding their own logic
+		*/
+		virtual void Upgrade();
+		virtual void DownGrade();
 
-		//Getter récupérant _level et _value respectivement
+		//Getter for this class attributs
 		const int GetLevel() const;
 		const float GetValue() const;
 
-		//Setter affectant un niveau --> a besoin du calcul apres affectation du niveau ()
-			//--> Virtual car implémentation dans les classes dérivées
+		/*
+			Setter of the _level (and will recompute the _value according to the new level setted in sub classes)
+				Virtual as _level will impact _value so _value has to be (re)computed with the sub class method redefinition)
+		*/
 		virtual void SetLevel(int level);
 };
 
