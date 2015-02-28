@@ -58,6 +58,9 @@ int GetPlayableUnitIndex(std::vector< Unit* > & units)
 	return -1;
 }
 
+/*
+	Function applying the action return by the functor in Class AI
+*/
 void ApplyAction(Unit & unit, Action & unitAction, Army & armyB, std::string offenseArmy, std::string defenseArmy)
 {
 	if (unitAction.GetAction() == ActionType::Shoot)
@@ -66,7 +69,6 @@ void ApplyAction(Unit & unit, Action & unitAction, Army & armyB, std::string off
 		armyB.GetUnit(unitAction.GetId()).TakeDamage(unit.GetWeaponDamage().GetValue());
 		
 		Unit unitAttacked = armyB.GetUnit(unitAction.GetId());
-		//unitAttacked.TakeDamage(unit.GetWeaponDamage().GetValue());
 
 		std::cout << "Unit " << unit.GetId() << "(" << offenseArmy << ") attacked Unit " << unitAttacked.GetId() << "(" << defenseArmy << ") has " << unitAttacked.GetLifePoint().GetValue() << " HP left" << std::endl;
 	}
@@ -90,6 +92,10 @@ void ApplyAction(Unit & unit, Action & unitAction, Army & armyB, std::string off
 	}
 }
 
+/*
+	Return a random position
+		Used to set units position before a battle
+*/
 Point GetRandomPosition(int nbUnit)
 {
 	Point p;
@@ -102,11 +108,15 @@ Point GetRandomPosition(int nbUnit)
 	return p;
 }
 
+/*
+	Loop making two armies fight
+*/
 void BattleLoop(Army & armyA, Army & armyB)
 {
 	unsigned int indexInit;
 	unsigned int sizeInit = armyA.Size();
 
+	//Set random position for all units in the two armies
 	for (indexInit = 0; indexInit < sizeInit; ++indexInit)
 		armyA.GetUnitsList()[indexInit]->SetRandomPosition(GetRandomPosition(sizeInit));
 
@@ -115,7 +125,7 @@ void BattleLoop(Army & armyA, Army & armyB)
 	for (indexInit = 0; indexInit < sizeInit; ++indexInit)
 		armyB.GetUnitsList()[indexInit]->SetRandomPosition(GetRandomPosition(sizeInit));
 
-	int i, indexUnit;
+	int indexUnit;
 	bool armyATurn = true;
 	bool found = false;
 	int randomLimit = armyA.Size() * 2;
@@ -130,6 +140,11 @@ void BattleLoop(Army & armyA, Army & armyB)
 	bool armyACanPlay = true;
 	bool armyBCanPlay = true;
 
+	/*
+		Battle loop
+	*/
+
+	//The battle keeps going until one army dies
 	while (armyA.Size() > 0 && armyB.Size() > 0)
 	{
 		std::cout << "============ Turn n" << ++turnNumber << " ============" << std::endl;
@@ -143,9 +158,11 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 		armyATurn = true;
 
+		//Checking if at least on unit from army A and B can play
 		armyACanPlay = armyA.CanPlay();
 		armyBCanPlay = armyB.CanPlay();
 
+		//Looping until every units from the two armies played
 		while (armyACanPlay || armyBCanPlay)
 		{
 			//ArmyA turn
@@ -164,10 +181,10 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 					armyB.Purge();
 				}
+				/*
 				else
-				{
-					//std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
-				}
+					std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
+				*/
 			}
 			//ArmyB turn
 			else
@@ -185,10 +202,10 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 					armyA.Purge();
 				}
+				/*
 				else
-				{
 					//std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
-				}
+				*/
 			}
 
 			nbUnitArmyA = unitsArmyA.size();
@@ -205,6 +222,29 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 		armyA.Refresh();
 		armyB.Refresh();
+
+		//If a battle last more than 1000 turn, the army with the more units win (all units from the other army commit Seppuku)
+		//If the two armies has the same number of unit --> random to choose a winner and a looser
+		if (turnNumber > 1000)
+		{
+			if (unitsArmyA.size() < unitsArmyB.size())
+			{
+				armyA.Kill();
+			}
+			else if (unitsArmyA.size() > unitsArmyB.size())
+			{
+				armyB.Kill();
+			}
+			else
+			{
+				int randLooser = rand() % 2;
+
+				if (randLooser == 0)
+					armyA.Kill();
+				else
+					armyB.Kill();
+			}
+		}
 
 		std::cout << std::endl;
 		std::cout << std::endl;
@@ -261,6 +301,9 @@ void BattleLoop(Army & armyA, Army & armyB)
 	std::cout << "Army B score : " << armyB.Size() << std::endl;
 }
 
+/*
+	Main of the project
+*/
 int _tmain(int argc, _TCHAR* argv[])
 {
 	
@@ -284,12 +327,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "Global level : ";
 	std::cin >> Y; // --> global level
 
-
+	/*
+		Reset T if the user enter an unscoped value
+	*/
 	if (T >= ((N - 1) * X))
 		T = ((N - 1) * X) / 2;
 
-	std::vector<Army> armiesVector;
 
+	std::vector<Army> armiesVector;
 	
 	int i, j, k, l;
 
@@ -297,19 +342,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (i = 0; i < N; ++i)
 		armiesVector.push_back(Army(X, Y));
 
+	/*
+		Saving the sizes of armies / armies to keep, cross, mutate
+	*/
 	int nbArmies = armiesVector.size();
 
 	int nbArmyBest = 0.1f * nbArmies;
 	int nbArmyCrossing = 0.3f * nbArmies;
-	int nbArmyMutating = 0.3 * nbArmies;
+	int nbArmyMutating = 0.3f * nbArmies;
 	int nbLeftOver = nbArmies - (nbArmyBest + nbArmyCrossing + nbArmyMutating);
 
 	int indexRandom = 0;
 
-	std::vector<Army> newGeneration;
-
-	bool loopBreak = false;
-
+	/*
+		Main loop of the project
+			Every army is fighting each other
+	*/
 	for (i = 0; i < I; ++i)
 	{
 		for (j = 0; j < (nbArmies-1); ++j)
@@ -324,47 +372,62 @@ int _tmain(int argc, _TCHAR* argv[])
 				armiesVector[j].AddScore(armyA.Size());
 				armiesVector[k].AddScore(armyB.Size());
 			}
-			
-			std::sort(armiesVector.rbegin(), armiesVector.rend());
-			
-			if (armiesVector[0].GetScore() < T)
-			{
-				newGeneration.clear();
-
-				for (l = 0; l < nbArmyBest; ++l);
-				{
-					newGeneration.push_back(armiesVector[l]);
-				}
-				for (l = 0; l < nbArmyCrossing; ++l);
-				{
-					indexRandom = rand() % nbArmies;
-					newGeneration.push_back( (armiesVector[l] * armiesVector[indexRandom]) );
-				}
-				for (l = 0; l < nbArmyMutating; ++l);
-				{
-					armiesVector[l].Mutate();
-					newGeneration.push_back(armiesVector[l]);
-				}
-				for (l = 0; l < nbLeftOver; ++l);
-				{
-					newGeneration.push_back(Army(X, Y));
-				}
-
-				armiesVector.clear();
-
-				armiesVector = newGeneration;
-			}
-			else
-			{
-				loopBreak = true;
-				break;
-			}
 		}
 
-		if (loopBreak)
+		//Sorting armies in the vector by score decreasing
+		std::sort(armiesVector.rbegin(), armiesVector.rend());
+
+		//Creating a new generation of armies if the best army doesn't get the score T (entre by the user)
+		if (armiesVector[0].GetScore() < T)
+		{
+			std::vector<Army> newGeneration;
+
+			//Taking 0.1 if the best
+			for (l = 0; l < nbArmyBest; l++)
+			{
+				newGeneration.push_back(armiesVector[l]);
+				newGeneration[l].ResetScore();
+			}
+
+			//Crossing 0.3 of the best
+			for (l = 0; l < nbArmyCrossing; l++)
+			{
+				indexRandom = rand() % nbArmies;
+				newGeneration.push_back((armiesVector[l] * armiesVector[indexRandom]));
+			}
+
+			//Mutating 0.3 of the best
+			for (l = 0; l < nbArmyMutating; l++)
+			{
+				armiesVector[l].Mutate();
+				newGeneration.push_back(armiesVector[l]);
+			}
+
+			//Filling with random army
+			for (l = 0; l < nbLeftOver; l++)
+			{
+				newGeneration.push_back(Army(X, Y));
+			}
+
+			//Reseting all score
+			for (l = 0; l < newGeneration.size(); ++l)
+				newGeneration[l].ResetScore();
+
+			armiesVector.clear();
+
+			//Copying
+			armiesVector = newGeneration;
+		}
+		//If the best army got a score >= T, breaking the loop and saving this army
+		else
 			break;
 	}
 	
+	/*
+		End of the simulation
+		Saving the best army in a file in the path C:/armyX_Y.save
+	*/
+	std::cout << std::endl;
 	std::cout << "Score best army : " << armiesVector[0].GetScore() << std::endl;
 
 	std::string const fileName = "C:/army_" + std::to_string(X) + "_" + std::to_string(Y) + ".save";
@@ -381,8 +444,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		for (i = 0; i < size; ++i)
 		{
-			flux << units[i]->operator[](0).GetLevel() << " " << units[i]->operator[](1).GetLevel() << " " << units[i]->operator[](2).GetLevel() << " " << units[i]->operator[](3).GetLevel() << " " << units[i]->operator[](4).GetLevel() << " " << units[i]->operator[](5).GetLevel() << " " << units[i]->operator[](6).GetLevel() << std::endl;
+			flux << units[i]->operator[](0).GetLevel() << " " << units[i]->operator[](1).GetLevel() << " " << units[i]->operator[](2).GetLevel() << " " << units[i]->operator[](3).GetLevel() << " " << units[i]->operator[](4).GetLevel() << " " << units[i]->operator[](5).GetLevel() << " " << units[i]->operator[](6).GetLevel() << " " << units[i]->GetAiCode() << std::endl;
 		}
+
+		std::cout << "File created : " << fileName << std::endl;
 	}
 	else
 	{

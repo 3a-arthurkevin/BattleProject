@@ -326,7 +326,7 @@ Army Army::operator * (const Army & army) const
 */
 bool Army::operator < (const Army & army) const
 {
-	return (this->Size() < army.Size());
+	return (this->_score < army._score);
 }
 
 bool Army::operator > (const Army & army) const
@@ -395,4 +395,17 @@ bool Army::CanPlay() const
 	}
 
 	return canPlay;
+}
+
+//Kill every unit of the army --> called when a battle is lasting more than 3000 turns
+void Army::Kill()
+{
+	int size = this->_units.size();
+	int i;
+
+	for (i = 0; i < size; ++i)
+	{
+		this->_units[i]->Seppuku();
+	}
+	this->Purge();
 }

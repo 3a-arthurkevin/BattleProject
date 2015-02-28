@@ -102,6 +102,9 @@ class Army
 
 		//Return true if at least one unit can play
 		bool CanPlay() const;
+
+		//Kill every unit of the army --> called when a battle is lasting more than 3000 turns
+		void Kill();
 };
 
 #endif
