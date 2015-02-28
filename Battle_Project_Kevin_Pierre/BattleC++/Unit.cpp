@@ -292,8 +292,8 @@ bool Unit::CanShoot() const
 */
 void Unit::Mutate()
 {
-	int indexToDownGrade = this->FindCapacityNotCaped(-1);
-	int indexToUpGrade = this->FindCapacityNotCaped(indexToDownGrade);
+	int indexToDownGrade = this->FindCapacity(-1);
+	int indexToUpGrade = this->FindCapacity(indexToDownGrade);
 	
 	if ((indexToDownGrade >= 0 && indexToDownGrade <= 6) && (indexToUpGrade >= 0 && indexToUpGrade <= 6))
 	{
@@ -311,7 +311,7 @@ void Unit::Mutate()
 	Return a new Unit by "fusing" between 2 units
 		--> overriding of the * operator
 */
-const int Unit::FindCapacityNotCaped(int index)
+const int Unit::FindCapacity(int index)
 {
 	int nbCapacityTotal = 7;
 

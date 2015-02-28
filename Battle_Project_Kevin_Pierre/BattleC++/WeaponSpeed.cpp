@@ -22,7 +22,7 @@ WeaponSpeed::WeaponSpeed(void)
 void WeaponSpeed::ComputeValue()
 {
 	//this->_maxValue = 1000.f / (1.f + this->_level);
-	this->_maxValue = 10.f / (1.f + this->_level);
+	this->_maxValue = 5.f / (1.f + this->_level);
 }
 
 /*

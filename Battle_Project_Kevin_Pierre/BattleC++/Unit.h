@@ -92,7 +92,6 @@ class Unit
 			Getters of the class attributes
 				Return _position
 				Return _aiCode
-				//Return _levelMaxCap
 				Return _hasPlayed
 
 		*/
@@ -153,13 +152,13 @@ class Unit
 				--> the parameter index is an indx of capacity
 				the parameter is an index of capacity not retunrable
 		*/
-		const int FindCapacityNotCaped(int index);
+		const int FindCapacity(int index);
 		
 		/*
 			Return a new Unit by "fusing" between 2 units
 				--> overriding of the * operator 
 		*/
-		Unit operator*(Unit & unit);
+		Unit operator * (Unit & unit);
 
 		//Set lifePoint of an Unit to 0
 		void Seppuku();

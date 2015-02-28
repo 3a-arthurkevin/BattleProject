@@ -221,7 +221,7 @@ void Army::Refresh()
 }
 
 //Replace one unit by an other one generated randomly
-void Army::mutate()
+void Army::Mutate()
 {
 	//Choice between changing one unit and changing a part of army's units randomly
 	int choice = rand() % 2;
@@ -237,15 +237,20 @@ void Army::mutate()
 
 		this->GetUnitsList()[indexUnit]->Seppuku();
 		this->Purge();
-		this->GetUnitsList().push_back(new Unit(globalLevel));
+		this->AddNewUnit(globalLevel);
 	}
 	//Mutating a part of the army
 	else
 	{
 		unsigned int size = this->Size();
-		unsigned int sizeFactor = 4;
+		unsigned int sizeFactor = 1;
+		
+		if (size == 2)
+			sizeFactor = 2;
+		else if(size > 2)
+			sizeFactor = 3;
 
-		unsigned int nbUnitToMutate = size / 4; // --> mutate 1/4 of the army
+		unsigned int nbUnitToMutate = size / sizeFactor; // --> mutate half of the army
 		unsigned int i;
 
 		for (i = 0; i < nbUnitToMutate; ++i)
@@ -254,6 +259,12 @@ void Army::mutate()
 			this->_units[indexUnit]->Mutate();
 		}
 	}
+}
+
+//Add a new Unit randomly generated in the army
+void Army::AddNewUnit(int globalLevel)
+{
+	this->_units.push_back(new Unit(globalLevel));
 }
 
 /*
@@ -269,8 +280,13 @@ Army Army::operator * (const Army & army) const
 	unsigned int indexUnitA;
 	unsigned int indexUnitB;
 
-	unsigned int sizeFactor = 3;
 	unsigned int size = this->Size();
+	unsigned int sizeFactor = 1;
+
+	if (size == 2)
+		sizeFactor = 2;
+	else if (size > 2)
+		sizeFactor = 3;
 
 	unsigned int sizeA = size / sizeFactor;
 	unsigned int sizeB = size / sizeFactor;
@@ -280,22 +296,22 @@ Army Army::operator * (const Army & army) const
 
 	for (i = 0; i < sizeA; ++i)
 	{
-		indexUnitA = rand() % this->Size();
+		indexUnitA = rand() % size;
 
 		newUnits.push_back(this->_units[indexUnitA]);
 	}
 
 	for (i = 0; i < sizeB; ++i)
 	{
-		indexUnitB = rand() % army.Size();
+		indexUnitB = rand() % size;
 
-		newUnits.push_back(this->_units[indexUnitB]);
+		newUnits.push_back(army._units[indexUnitB]);
 	}
 
 	for (i = 0; i < leftover; ++i)
 	{
-		indexUnitA = rand() % this->Size();
-		indexUnitB = rand() % army.Size();
+		indexUnitA = rand() % size;
+		indexUnitB = rand() % size;
 
 		Unit newUnit = (*(this->_units[indexUnitA])) * (*(army._units[indexUnitB]));
 
@@ -356,4 +372,27 @@ void Army::SetScore(const int score)
 void Army::AddScore(const int scoreToAdd)
 {
 	this->_score += scoreToAdd;
+}
+
+void Army::ResetScore()
+{
+	this->_score = 0;
+}
+
+//Return true if all units played else false
+bool Army::CanPlay() const
+{
+	bool canPlay = false;
+
+	int size = this->_units.size();
+	int i = 0;
+	
+	while (!canPlay && i < size)
+	{
+		if (this->_units[i]->GetHasPlayed() == false)
+			canPlay = true;
+		++i;
+	}
+
+	return canPlay;
 }

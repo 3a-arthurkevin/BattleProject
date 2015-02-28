@@ -68,7 +68,10 @@ class Army
 			Or
 			Mutating a part of the army
 		*/
-		void mutate();
+		void Mutate();
+
+		//Add a new Unit randomly generated in the army
+		void AddNewUnit(int globalLevel);
 
 		/*
 			Mutation bewteen two Army --> Returning a new army composed with :
@@ -95,6 +98,10 @@ class Army
 		int GetScore() const;
 		void SetScore(const int score);
 		void AddScore(const int scoreToAdd);
+		void ResetScore();
+
+		//Return true if at least one unit can play
+		bool CanPlay() const;
 };
 
 #endif

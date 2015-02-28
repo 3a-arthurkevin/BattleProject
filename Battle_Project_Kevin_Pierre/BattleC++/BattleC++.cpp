@@ -25,6 +25,7 @@
 
 #include "AI.h"
 
+#include <fstream>
 
 //Return the index of the unit who hasn't played yet
 int GetPlayableUnitIndex(std::vector< Unit* > & units)
@@ -126,6 +127,9 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 	int turnNumber = 0;
 
+	bool armyACanPlay = true;
+	bool armyBCanPlay = true;
+
 	while (armyA.Size() > 0 && armyB.Size() > 0)
 	{
 		std::cout << "============ Turn n" << ++turnNumber << " ============" << std::endl;
@@ -139,7 +143,10 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 		armyATurn = true;
 
-		for (i = 0; i < totalUnits; ++i)
+		armyACanPlay = armyA.CanPlay();
+		armyBCanPlay = armyB.CanPlay();
+
+		while (armyACanPlay || armyBCanPlay)
 		{
 			//ArmyA turn
 			if (armyATurn == true)
@@ -159,11 +166,8 @@ void BattleLoop(Army & armyA, Army & armyB)
 				}
 				else
 				{
-					std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
-					--i;
+					//std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
 				}
-
-				armyATurn = false;
 			}
 			//ArmyB turn
 			else
@@ -183,12 +187,20 @@ void BattleLoop(Army & armyA, Army & armyB)
 				}
 				else
 				{
-					std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
-					--i;
+					//std::cout << "Error - unitIndex < 0 --> no unit can move" << std::endl;
 				}
-
-				armyATurn = true;
 			}
+
+			nbUnitArmyA = unitsArmyA.size();
+			nbUnitArmyB = unitsArmyB.size();
+
+			if (nbUnitArmyA == 0 || nbUnitArmyB == 0)
+				break;
+
+			armyACanPlay = armyA.CanPlay();
+			armyBCanPlay = armyB.CanPlay();
+
+			armyATurn = !armyATurn;
 		}
 
 		armyA.Refresh();
@@ -197,6 +209,7 @@ void BattleLoop(Army & armyA, Army & armyB)
 		std::cout << std::endl;
 		std::cout << std::endl;
 
+		/*
 		for (int i = 0; i < armyA.Size(); ++i)
 		{
 			//armyA.GetUnitsList()[i]->SetRandomPosition(GetRandomPosition(armyA.Size()));
@@ -209,9 +222,9 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 			//std::cout << "Speep : " << armyA.GetUnitsList()[i]->operator[](0).GetValue() << std::endl;
 			std::cout << "Life : " << armyA.GetUnitsList()[i]->operator[](1).GetValue() << "/" << armyA.GetUnitsList()[i]->GetLifePoint().GetMaxValue() << std::endl;
-			//std::cout << "Armor : " << armyA.GetUnitsList()[i]->operator[](2).GetValue() << std::endl;
+			std::cout << "Armor : " << armyA.GetUnitsList()[i]->operator[](2).GetValue() << std::endl;
 			//std::cout << "Regen : " << armyA.GetUnitsList()[i]->operator[](3).GetValue() << std::endl;
-			//std::cout << "W-Damage : " << armyA.GetUnitsList()[i]->operator[](4).GetValue() << std::endl;
+			std::cout << "W-Damage : " << armyA.GetUnitsList()[i]->operator[](4).GetValue() << std::endl;
 			//std::cout << "W-Range : " << armyA.GetUnitsList()[i]->operator[](5).GetValue() << std::endl;
 			std::cout << "W-Speed : " << armyA.GetUnitsList()[i]->operator[](6).GetValue() << "/" << armyA.GetUnitsList()[i]->GetWeaponSpeed().GetMaxValue() << std::endl;
 
@@ -233,14 +246,15 @@ void BattleLoop(Army & armyA, Army & armyB)
 
 			//std::cout << "Speep : " << armyB.GetUnitsList()[i]->operator[](0).GetValue() << std::endl;
 			std::cout << "Life : " << armyB.GetUnitsList()[i]->operator[](1).GetValue() << "/" << armyB.GetUnitsList()[i]->GetLifePoint().GetMaxValue() << std::endl;
-			//std::cout << "Armor : " << armyB.GetUnitsList()[i]->operator[](2).GetValue() << std::endl;
+			std::cout << "Armor : " << armyB.GetUnitsList()[i]->operator[](2).GetValue() << std::endl;
 			//std::cout << "Regen : " << armyB.GetUnitsList()[i]->operator[](3).GetValue() << std::endl;
-			//std::cout << "W-Damage : " << armyB.GetUnitsList()[i]->operator[](4).GetValue() << std::endl;
+			std::cout << "W-Damage : " << armyB.GetUnitsList()[i]->operator[](4).GetValue() << std::endl;
 			//std::cout << "W-Range : " << armyB.GetUnitsList()[i]->operator[](5).GetValue() << std::endl;
 			std::cout << "W-Speed : " << armyB.GetUnitsList()[i]->operator[](6).GetValue() << "/" << armyB.GetUnitsList()[i]->GetWeaponSpeed().GetMaxValue() << std::endl;
 
 			std::cout << std::endl;
 		}
+		*/
 	}
 
 	std::cout << "Army A score : " << armyA.Size() << std::endl;
@@ -252,7 +266,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	//Initialisation du random pour que ca ne fasse pas la même chose à chaque Run (à ne faire qu'un fois dans le code)
 	srand((unsigned int)time(NULL));
-	
+
 	
 	int I, T, N, X, Y;
 	std::cout << "Iteration : ";
@@ -277,40 +291,109 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::vector<Army> armiesVector;
 
 	
-	int i, j, k;
+	int i, j, k, l;
 
 	//Creating N armies, with X units who are level Y
 	for (i = 0; i < N; ++i)
-	{
-		for (j = 0; j < X; ++j)
-			armiesVector.push_back(Army(X, Y));
-	}
+		armiesVector.push_back(Army(X, Y));
 
+	int nbArmies = armiesVector.size();
+
+	int nbArmyBest = 0.1f * nbArmies;
+	int nbArmyCrossing = 0.3f * nbArmies;
+	int nbArmyMutating = 0.3 * nbArmies;
+	int nbLeftOver = nbArmies - (nbArmyBest + nbArmyCrossing + nbArmyMutating);
+
+	int indexRandom = 0;
+
+	std::vector<Army> newGeneration;
+
+	bool loopBreak = false;
 
 	for (i = 0; i < I; ++i)
 	{
-		for (j = 0; j < I; ++j)
+		for (j = 0; j < (nbArmies-1); ++j)
 		{
-			for (k = j + 1; k < I; ++k)
+			for (k = j + 1; k < nbArmies; ++k)
 			{
+				Army armyA(armiesVector[j].GetUnitsList());
+				Army armyB(armiesVector[k].GetUnitsList());
 
+				BattleLoop(armyA, armyB);
+
+				armiesVector[j].AddScore(armyA.Size());
+				armiesVector[k].AddScore(armyB.Size());
 			}
-			//Army armyA(armiesVector[i].GetUnitsList());
-			//Army armyB(armiesVector[j].GetUnitsList());
 			
-			//BattleLoop(armyA, armyB);
+			std::sort(armiesVector.rbegin(), armiesVector.rend());
+			
+			if (armiesVector[0].GetScore() < T)
+			{
+				newGeneration.clear();
+
+				for (l = 0; l < nbArmyBest; ++l);
+				{
+					newGeneration.push_back(armiesVector[l]);
+				}
+				for (l = 0; l < nbArmyCrossing; ++l);
+				{
+					indexRandom = rand() % nbArmies;
+					newGeneration.push_back( (armiesVector[l] * armiesVector[indexRandom]) );
+				}
+				for (l = 0; l < nbArmyMutating; ++l);
+				{
+					armiesVector[l].Mutate();
+					newGeneration.push_back(armiesVector[l]);
+				}
+				for (l = 0; l < nbLeftOver; ++l);
+				{
+					newGeneration.push_back(Army(X, Y));
+				}
+
+				armiesVector.clear();
+
+				armiesVector = newGeneration;
+			}
+			else
+			{
+				loopBreak = true;
+				break;
+			}
+		}
+
+		if (loopBreak)
+			break;
+	}
+	
+	std::cout << "Score best army : " << armiesVector[0].GetScore() << std::endl;
+
+	std::string const fileName = "C:/army_" + std::to_string(X) + "_" + std::to_string(Y) + ".save";
+
+	std::string const file(fileName);
+	std::ofstream flux(fileName.c_str());
+
+	std::vector<Unit*> units = armiesVector[0].GetUnitsList();
+
+	if (flux)
+	{
+		int i;
+		int size = units.size();
+
+		for (i = 0; i < size; ++i)
+		{
+			flux << units[i]->operator[](0).GetLevel() << " " << units[i]->operator[](1).GetLevel() << " " << units[i]->operator[](2).GetLevel() << " " << units[i]->operator[](3).GetLevel() << " " << units[i]->operator[](4).GetLevel() << " " << units[i]->operator[](5).GetLevel() << " " << units[i]->operator[](6).GetLevel() << std::endl;
 		}
 	}
-
-	//std::sort(armiesVector.begin(), armiesVector.end());
-	//std::reverse(armiesVector.begin(), armiesVector.end());
-
+	else
+	{
+		std::cout << "Error - Can't write in file." << std::endl;
+	}
 
 	//Permet de maintenir la console lors d'un Run (sinon elle se ferme toute seul -__-')
-	int end;
+	int endSimu = 0;
 	std::cout << "End of the simulation" << std::endl;
 	std::cout << "Write any character from your keybord then press Enter to end the simulation : ";
-	std::cin >> end;
+	std::cin >> endSimu;
 	std::cin.get();
 
 	return 0;
