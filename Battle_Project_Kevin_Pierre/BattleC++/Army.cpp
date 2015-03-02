@@ -72,7 +72,7 @@ Unit & Army::GetUnit(int id)
 		++indexUnit;
 	}
 
-	std::cout << "Error 404 - Unit with id " << id << " not found :(" << std::endl;
+	//std::cout << "Error 404 - Unit with id " << id << " not found :(" << std::endl;
 }
 
 //Return the size of the vector _units
@@ -107,7 +107,7 @@ Unit & Army::GetNearestUnit(const Point & point)
 		return *(this->_units[indexNearestUnit]);
 	}
 	
-	std::cout << "Error - No Unit in this army" << std::endl;
+	//std::cout << "Error - No Unit in this army" << std::endl;
 }
 
 Unit & Army::GetFarthestUnit(const Point & point)
@@ -160,7 +160,7 @@ Unit & Army::GetLowestUnit(int indexCapacity)
 		return *(this->_units[indexLowestUnit]);
 	}
 
-	std::cout << "Error - No Unit in this army" << std::endl;
+	//std::cout << "Error - No Unit in this army" << std::endl;
 }
 
 Unit & Army::GetHighestUnit(int indexCapacity)
@@ -184,7 +184,7 @@ Unit & Army::GetHighestUnit(int indexCapacity)
 		return *(this->_units[indexHighestUnit]);
 	}
 
-	std::cout << "Error - No Unit in this army" << std::endl;
+	//std::cout << "Error - No Unit in this army" << std::endl;
 }
 
 /*

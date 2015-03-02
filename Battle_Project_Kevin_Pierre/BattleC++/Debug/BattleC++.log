@@ -1,14 +1,13 @@
-﻿La génération a démarré 01/03/2015 00:14:37.
+﻿La génération a démarré 02/03/2015 21:22:42.
      1>Projet "C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\BattleC++\BattleC++.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattleC++.cpp
-         BattleC++.cpp
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(102): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(103): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(350): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(351): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(352): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\battlec++.cpp(413): warning C4018: '<' : incompatibilité signed/unsigned
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Army.cpp
+         Army.cpp
+     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\army.cpp(76): warning C4715: 'Army::GetUnit' : les chemins de contrôle ne retournent pas tous une valeur
+     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\army.cpp(136): warning C4715: 'Army::GetFarthestUnit' : les chemins de contrôle ne retournent pas tous une valeur
+     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\army.cpp(164): warning C4715: 'Army::GetLowestUnit' : les chemins de contrôle ne retournent pas tous une valeur
+     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\army.cpp(188): warning C4715: 'Army::GetHighestUnit' : les chemins de contrôle ne retournent pas tous une valeur
+     1>c:\users\kevin\desktop\cours\esgi\4eme\c++\battleproject\battle_project_kevin_pierre\battlec++\army.cpp(111): warning C4715: 'Army::GetNearestUnit' : les chemins de contrôle ne retournent pas tous une valeur
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kevin\Desktop\Cours\ESGI\4eme\C++\BattleProject\Battle_Project_Kevin_Pierre\Debug\BattleC++.lib" /MACHINE:X86 Debug\Action.obj
          Debug\Armor.obj
@@ -31,4 +30,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:01.62
+Temps écoulé 00:00:01.19
