@@ -377,7 +377,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Sorting armies in the vector by score decreasing
 		std::sort(armiesVector.rbegin(), armiesVector.rend());
 
-		//Creating a new generation of armies if the best army doesn't get the score T (entre by the user)
+		//Creating a new generation of armies if the best army's score is smaller than T (value setted by the user)
 		if (armiesVector[0].GetScore() < T)
 		{
 			std::vector<Army> newGeneration;
