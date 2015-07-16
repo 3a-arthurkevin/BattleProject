@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Capacities">
+      <UniqueIdentifier>{5e8c222d-c873-40cf-bddb-79e2766c9f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Capacities\BaseClass">
+      <UniqueIdentifier>{cd4fc486-972c-491d-b366-bc7ee8cb07ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Utils">
+      <UniqueIdentifier>{27dbbe53-a0cb-41f1-bb0a-de3d88e6fd17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Battle">
+      <UniqueIdentifier>{12e3f35f-0f03-4724-8720-25836161f3fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Battle">
+      <UniqueIdentifier>{576dc77f-3be9-4e58-8a2c-b88de96f7d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Extractors">
+      <UniqueIdentifier>{e209b753-dcbe-493a-86b6-1c2d2be3eaea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Extractors\BaseClass">
+      <UniqueIdentifier>{d9265c91-4b4b-4f37-a993-0c874d9ae456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Actions">
+      <UniqueIdentifier>{70072344-6cc4-40e4-9c05-689f5b5ea095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Actions\BaseClass">
+      <UniqueIdentifier>{e095f646-ffb1-4886-b670-bb55b1d9c362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\AI">
+      <UniqueIdentifier>{bb27a6a3-f889-4a47-899b-d765e4cfcf08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\AI">
+      <UniqueIdentifier>{ed63fe42-7da6-49c3-985e-8a3dcc3293c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Extractors">
+      <UniqueIdentifier>{ce63bde8-eaf5-42f4-9157-2d648a443182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Nodes">
+      <UniqueIdentifier>{6449a5f3-7957-402f-b4fc-ecadb9843aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Nodes\BaseClass">
+      <UniqueIdentifier>{046d3d94-ccea-4fdd-8823-d1e2d6a2c9dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Nodes">
+      <UniqueIdentifier>{e8d76f16-c9cd-4b24-8b70-22f6aa086fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Nodes\BaseClass">
+      <UniqueIdentifier>{c56e38fa-ca3c-4339-ab13-71208a8a8354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Operators">
+      <UniqueIdentifier>{f2dcaaa5-a96a-40fb-81c9-bf38a31c00f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Operators\BaseClass">
+      <UniqueIdentifier>{caf57c89-b0b4-4722-86c1-866ca41a2ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Factory">
+      <UniqueIdentifier>{41830dc4-bd4e-4f3d-b98c-39c08658684b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Factories">
+      <UniqueIdentifier>{cbee7747-58a3-4140-b6cc-e3196381af4d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BattleIA2.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Fichiers sources\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Army.cpp">
+      <Filter>Fichiers sources\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Training.cpp">
+      <Filter>Fichiers sources\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Battle.cpp">
+      <Filter>Fichiers sources\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Fichiers sources\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Fichiers sources\Nodes\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionNode.cpp">
+      <Filter>Fichiers sources\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionNode.cpp">
+      <Filter>Fichiers sources\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtractorFactory.cpp">
+      <Filter>Fichiers sources\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="AiFactory.cpp">
+      <Filter>Fichiers sources\Factories</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SpeedCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="Capacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="RegenCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="FirerateCapacity.h">
+      <Filter>Fichiers d%27en-tête\Capacities</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Fichiers d%27en-tête\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Army.h">
+      <Filter>Fichiers d%27en-tête\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractorFactory.h">
+      <Filter>Fichiers d%27en-tête\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractorValue.h">
+      <Filter>Fichiers d%27en-tête\Extractors</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractorUnit.h">
+      <Filter>Fichiers d%27en-tête\Extractors</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractorPoint.h">
+      <Filter>Fichiers d%27en-tête\Extractors</Filter>
+    </ClInclude>
+    <ClInclude Include="Extractor.h">
+      <Filter>Fichiers d%27en-tête\Extractors\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractorArmy.h">
+      <Filter>Fichiers d%27en-tête\Extractors</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Fichiers d%27en-tête\Actions\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyAction.h">
+      <Filter>Fichiers d%27en-tête\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>Fichiers d%27en-tête\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotAction.h">
+      <Filter>Fichiers d%27en-tête\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Battle.h">
+      <Filter>Fichiers d%27en-tête\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Training.h">
+      <Filter>Fichiers d%27en-tête\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Fichiers d%27en-tête\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Fichiers d%27en-tête\Nodes\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionNode.h">
+      <Filter>Fichiers d%27en-tête\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionNode.h">
+      <Filter>Fichiers d%27en-tête\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Smaller.h">
+      <Filter>Fichiers d%27en-tête\Operators</Filter>
+    </ClInclude>
+    <ClInclude Include="Greater.h">
+      <Filter>Fichiers d%27en-tête\Operators</Filter>
+    </ClInclude>
+    <ClInclude Include="Operator.h">
+      <Filter>Fichiers d%27en-tête\Operators\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="AiFactory.h">
+      <Filter>Fichiers d%27en-tête\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="AiCodeGenerator.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
