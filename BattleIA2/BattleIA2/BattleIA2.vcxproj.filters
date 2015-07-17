@@ -49,12 +49,6 @@
     <Filter Include="Fichiers sources\Extractors">
       <UniqueIdentifier>{ce63bde8-eaf5-42f4-9157-2d648a443182}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Nodes">
-      <UniqueIdentifier>{6449a5f3-7957-402f-b4fc-ecadb9843aeb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Nodes\BaseClass">
-      <UniqueIdentifier>{046d3d94-ccea-4fdd-8823-d1e2d6a2c9dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Nodes">
       <UniqueIdentifier>{e8d76f16-c9cd-4b24-8b70-22f6aa086fc2}</UniqueIdentifier>
     </Filter>
@@ -96,19 +90,13 @@
     <ClCompile Include="AI.cpp">
       <Filter>Fichiers sources\AI</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Fichiers sources\Nodes\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionNode.cpp">
-      <Filter>Fichiers sources\Nodes</Filter>
-    </ClCompile>
-    <ClCompile Include="DecisionNode.cpp">
-      <Filter>Fichiers sources\Nodes</Filter>
-    </ClCompile>
     <ClCompile Include="ExtractorFactory.cpp">
       <Filter>Fichiers sources\Factories</Filter>
     </ClCompile>
     <ClCompile Include="AiFactory.cpp">
+      <Filter>Fichiers sources\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="AiCodeGenerator.cpp">
       <Filter>Fichiers sources\Factories</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,8 +197,11 @@
     <ClInclude Include="AiFactory.h">
       <Filter>Fichiers d%27en-tête\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="EscapeAction.h">
+      <Filter>Fichiers d%27en-tête\Actions</Filter>
+    </ClInclude>
     <ClInclude Include="AiCodeGenerator.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -130,6 +130,19 @@ class Point
 			else 
 				(*this) += (vec*(max / d));
 		}
+
+		//Translate this point in direction of the one in parameter:
+		// if distance is bigger than max, translate to -(max units)
+		// otherwise translate to the position -(p)
+		void escapeFrom(const Point& p, float max)
+		{
+			Point vec = (p - (*this));
+			float d = vec.norm();
+			if (d <= max)
+				(*this) -= vec;
+			else
+				(*this) -= (vec*(max / d));
+		}
 };
 
 //Star operator overloading. Case  Scalar*Point

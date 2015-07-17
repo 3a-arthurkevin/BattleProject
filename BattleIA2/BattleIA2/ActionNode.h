@@ -7,6 +7,7 @@
 
 #include "ShotAction.h"
 #include "MoveAction.h"
+#include "EscapeAction.h"
 #include "EmptyAction.h"
 
 class ShotActionNode : public Node
@@ -40,6 +41,23 @@ class MoveActionNode : public Node
 		std::unique_ptr<Action> get(Unit& u, Army& a, Army& o)
 		{
 			return std::unique_ptr<Action>(new MoveAction(u, _destinationExtractor->get(u, a, o)));
+		}
+};
+
+class EscapeActionNode : public Node
+{
+	private:
+		std::shared_ptr<Extractor<Point>> _destinationExtractor;
+
+	public:
+		EscapeActionNode(std::stringstream& aiCode)
+		{
+			_destinationExtractor = ExtractorFactory::getPointExtractor(aiCode);
+		}
+
+		std::unique_ptr<Action> get(Unit& u, Army& a, Army& o)
+		{
+			return std::unique_ptr<Action>(new EscapeAction(u, _destinationExtractor->get(u, a, o)));
 		}
 };
 

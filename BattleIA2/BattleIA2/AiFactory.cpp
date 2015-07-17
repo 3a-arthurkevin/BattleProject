@@ -23,9 +23,12 @@ std::unique_ptr<Node> AiFactory::generateNode(std::stringstream& aiCode)
 				{
 				case 'A':
 					return std::unique_ptr<Node>(new ShotActionNode(aiCode));
-
-				case 'E':
+				/*
+				case 'M':
 					return std::unique_ptr<Node>(new MoveActionNode(aiCode));
+				*/
+				case 'E':
+					return std::unique_ptr<Node>(new EscapeActionNode(aiCode));
 
 				case 'N':
 					return std::unique_ptr<Node>(new EmptyActionNode());

@@ -157,6 +157,12 @@ class Unit
 			_position.moveTo(position, getSpeed().getValue());
 		}
 
+		//Change the position of the unit by moving in direction of the new one
+		void escapeFromPosition(const Point& position)
+		{
+			_position.escapeFrom(position, getSpeed().getValue());
+		}
+
 		//Provide the global level of the unit (I.E. the sum of all capacities levels)
 		int getLevel()const;
 

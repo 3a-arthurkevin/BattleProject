@@ -79,15 +79,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ActionNode.cpp" />
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AiCodeGenerator.cpp" />
     <ClCompile Include="AiFactory.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="BattleIA2.cpp" />
-    <ClCompile Include="DecisionNode.cpp" />
     <ClCompile Include="ExtractorFactory.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Training.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -104,6 +102,7 @@
     <ClInclude Include="DamageCapacity.h" />
     <ClInclude Include="DecisionNode.h" />
     <ClInclude Include="EmptyAction.h" />
+    <ClInclude Include="EscapeAction.h" />
     <ClInclude Include="Extractor.h" />
     <ClInclude Include="ExtractorFactory.h" />
     <ClInclude Include="ExtractorPoint.h" />

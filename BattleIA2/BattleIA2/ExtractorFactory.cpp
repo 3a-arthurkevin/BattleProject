@@ -226,7 +226,7 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 		}
 
 		int nbElement = c - '0';
-		if (nbElement >= 0 && nbElement <= 6)
+		if (nbElement >= 1 && nbElement <= 9)
 		{
 			aiCode >> c;
 			if (c == 'L')

@@ -16,8 +16,12 @@
 #include "ExtractorPoint.h"
 #include "ExtractorArmy.h"
 
+#include "AiCodeGenerator.h"
+#include "DecisionNode.h"
+
 int main(void)
 {
+	std::srand(static_cast<unsigned int>(time(NULL)));
 	/*
 	std::srand(static_cast<unsigned int>(time(NULL)));
 	std::shared_ptr<Army> champions;
@@ -61,14 +65,22 @@ int main(void)
 	out.close();
 	*/
 
+	
 	Army a = Army(5, 10);
 	Army o = Army(5, 10);
-	std::shared_ptr<Unit> u = a.getUnitsList()[0];
+	Unit u = *(a.getUnitsList()[0]);
 
+	/*
 	std::unique_ptr<Extractor<float>>ex = std::unique_ptr<Extractor<float>>(new ExtractorValue(5));
 
 	std::cout << ex->get(*u, a, o) << std::endl;
+	*/
 
+	std::string test = AiCodeGenerator::generateAiCode();
+	std::stringstream code;
+	code << test;
+	DecisionNode dn = DecisionNode(code);
+	dn.get(u, a, o);
 	std::cin.ignore();
 
 	return 0;
