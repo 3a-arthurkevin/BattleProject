@@ -1,7 +1,12 @@
 #include "ExtractorFactory.h"
 
+#include "ExtractorValue.h"
+#include "ExtractorUnit.h"
+#include "ExtractorArmy.h"
+#include "ExtractorPoint.h"
+
 //Read AiCode to return the right Value Extractor
-std::shared_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::stringstream& aiCode)
+std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try
@@ -15,7 +20,7 @@ std::shared_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				float value = 0.f;
 				aiCode >> value;
 				aiCode >> c;
-				return std::shared_ptr < Extractor<float> >
+				return std::unique_ptr < Extractor<float> >
 					(new ExtractorValue(value));
 			}
 			case 'C':
@@ -23,26 +28,26 @@ std::shared_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				int indexCapacity;
 				aiCode >> indexCapacity;
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorCxUnitValue(getUnitExtractor(aiCode), indexCapacity));
 
 				break;
 			}
 			case 'D':
 			{
-				return std::shared_ptr < Extractor<float> >
+				return std::unique_ptr < Extractor<float> >
 					(new ExtractorDistanceUnitPointValue(getUnitExtractor(aiCode), getPointExtractor(aiCode)));
 			}
 			case 'M':
 			{
 				aiCode >> c;
 				if (c == 'D')
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMaxDistancePointArmyValue(getArmyExtractor(aiCode), getPointExtractor(aiCode)));
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMaxCxArmyValue(getArmyExtractor(aiCode), indexCapacity));
 
 				break;
@@ -51,12 +56,12 @@ std::shared_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 			{
 				aiCode >> c;
 				if (c == 'D')
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMinDistancePointArmyValue(getArmyExtractor(aiCode), getPointExtractor(aiCode)));
 				
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMinCxArmyValue(getArmyExtractor(aiCode), indexCapacity));
 					
 				break;
@@ -66,30 +71,30 @@ std::shared_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 			{
 				aiCode >> c;
 				if (c == 'D')
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorAvgDistancePointArmyValue(getArmyExtractor(aiCode), getPointExtractor(aiCode)));
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<float> >
+					return std::unique_ptr < Extractor<float> >
 						(new ExtractorAvgCxArmyValue(getArmyExtractor(aiCode), indexCapacity));
 
 				break;
 			}
 		}
 
-		return std::shared_ptr < Extractor<float> >
+		return std::unique_ptr < Extractor<float> >
 			(new ExtractorValue(-1.f));
 	}
 	catch (...)
 	{
 		std::cout << "Erreur dans la Factory Extractor Value" << std::endl;
-		return std::shared_ptr < Extractor<float> >
+		return std::unique_ptr < Extractor<float> >
 					(new ExtractorValue(-1.f));
 	}
 }
 
-std::shared_ptr<Extractor<Unit>>ExtractorFactory:: getUnitExtractor(std::stringstream& aiCode)
+std::unique_ptr<Extractor<Unit>>ExtractorFactory:: getUnitExtractor(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try
@@ -100,19 +105,19 @@ std::shared_ptr<Extractor<Unit>>ExtractorFactory:: getUnitExtractor(std::strings
 		{
 			case 'U':
 			{
-				return std::shared_ptr < Extractor<Unit> >
+				return std::unique_ptr < Extractor<Unit> >
 					(new ExtractorUnit());
 			}
 			case 'L':
 			{
 				aiCode >> c;
 				if (c == 'D')
-					return std::shared_ptr < Extractor<Unit> >
+					return std::unique_ptr < Extractor<Unit> >
 						(new ExtractorMinDistancePointArmyUnit(getArmyExtractor(aiCode), getPointExtractor(aiCode)));
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<Unit> >
+					return std::unique_ptr < Extractor<Unit> >
 						(new ExtractorMinCxArmyUnit(getArmyExtractor(aiCode), indexCapacity));
 
 				break;
@@ -123,30 +128,30 @@ std::shared_ptr<Extractor<Unit>>ExtractorFactory:: getUnitExtractor(std::strings
 				aiCode >> c;
 
 				if (c == 'D')
-					return std::shared_ptr < Extractor<Unit> >
+					return std::unique_ptr < Extractor<Unit> >
 						(new ExtractorMaxDistancePointArmyUnit(getArmyExtractor(aiCode), getPointExtractor(aiCode)));
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
-					return std::shared_ptr < Extractor<Unit> >
+					return std::unique_ptr < Extractor<Unit> >
 						(new ExtractorMaxCxArmyUnit(getArmyExtractor(aiCode), indexCapacity));
 
 				break;
 			}
 		}
 
-		return std::shared_ptr < Extractor<Unit> >
+		return std::unique_ptr < Extractor<Unit> >
 			(new ExtractorUnit());
 	}
 	catch (...)
 	{
 		std::cout << "Erreur dans la Factory Extractor Unit" << std::endl;
-		return std::shared_ptr < Extractor<Unit> >
+		return std::unique_ptr < Extractor<Unit> >
 			(new ExtractorUnit());
 	}
 }
 
-std::shared_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::stringstream& aiCode)
+std::unique_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try
@@ -157,17 +162,17 @@ std::shared_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::strin
 		{
 			case 'B':
 			{
-				return std::shared_ptr < Extractor<Point> >
+				return std::unique_ptr < Extractor<Point> >
 					(new ExtractorCentroidArmyPoint(getArmyExtractor(aiCode)));
 			}
 			case 'P':
 			{
-				return std::shared_ptr < Extractor<Point> >
+				return std::unique_ptr < Extractor<Point> >
 					(new ExtractorPointUnitPoint(getUnitExtractor(aiCode)));
 			}
 			default:
 			{
-				return std::shared_ptr < Extractor<Point> >
+				return std::unique_ptr < Extractor<Point> >
 					(new ExtractorCentroidArmyPoint(getArmyExtractor(aiCode)));
 			}
 		}
@@ -175,12 +180,12 @@ std::shared_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::strin
 	catch (...)
 	{
 		std::cout << "Erreur dans la Factory Extractor Point" << std::endl;
-		return std::shared_ptr < Extractor<Point> >
+		return std::unique_ptr < Extractor<Point> >
 			(new ExtractorCentroidArmyPoint(getArmyExtractor(aiCode)));
 	}
 }
 
-std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::stringstream& aiCode)
+std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try
@@ -189,12 +194,12 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 		aiCode >> c;
 		if(c ==  'A')
 		{
-			return std::shared_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<Army> >
 				(new ExtractorArmyA());
 		}
 		else if (c == 'O')
 		{
-			return std::shared_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<Army> >
 				(new ExtractorArmyO());
 		}
 		else if (c == 'T')
@@ -206,7 +211,7 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					return std::shared_ptr < Extractor<Army>>
+					return std::unique_ptr < Extractor<Army>>
 						(new ExtractorTCxSmallerValueSetArmy(indexCapacity, getValueExtractor(aiCode), getArmyExtractor(aiCode)));
 				}
 			}
@@ -216,12 +221,12 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					return std::shared_ptr < Extractor<Army>>
+					return std::unique_ptr < Extractor<Army>>
 						(new ExtractorTCxGreaterValueSetArmy(indexCapacity, getValueExtractor(aiCode), getArmyExtractor(aiCode)));
 				}
 			}
 
-			return std::shared_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<Army> >
 				(new ExtractorArmyO());
 		}
 
@@ -234,14 +239,14 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				aiCode >> c;
 				if (c == 'D')
 				{
-					return std::shared_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<Army> >
 						(new ExtractorNMinDistancePointSetArmy(nbElement, getPointExtractor(aiCode), getArmyExtractor(aiCode)));
 				}
 
 				int indexCapacity = c - '0';
 				if (c >= 0 && c <= 6)
 				{
-					return std::shared_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<Army> >
 						(new ExtractorNMinCxSetArmy(nbElement, indexCapacity, getArmyExtractor(aiCode)));
 				}
 			}
@@ -250,26 +255,26 @@ std::shared_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				aiCode >> c;
 				if (c == 'D')
 				{
-					return std::shared_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<Army> >
 						(new ExtractorNMaxDistancePointSetArmy(nbElement, getPointExtractor(aiCode), getArmyExtractor(aiCode)));
 				}
 
 				int indexCapacity = c - '0';
 				if (c >= 0 && c <= 6)
 				{
-					return std::shared_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<Army> >
 						(new ExtractorNMaxCxSetArmy(nbElement, indexCapacity, getArmyExtractor(aiCode)));
 				}
 			}
 		}
 
-		return std::shared_ptr < Extractor<Army> >
+		return std::unique_ptr < Extractor<Army> >
 			(new ExtractorArmyO());
 	}
 	catch (...)
 	{
 		std::cout << "Erreur dans la Factory Extractor Army" << std::endl;
-		return std::shared_ptr < Extractor<Army> >
+		return std::unique_ptr < Extractor<Army> >
 			(new ExtractorArmyO());
 	}
 }

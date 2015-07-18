@@ -3,10 +3,10 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include <sstream>
+#include <memory>
 
-#include "Unit.h"
-#include "Army.h"
+class Unit;
+class Army;
 
 #include "Action.h"
 

@@ -66,21 +66,23 @@ int main(void)
 	*/
 
 	
-	Army a = Army(5, 10);
-	Army o = Army(5, 10);
-	Unit u = *(a.getUnitsList()[0]);
+	//Army a = Army(5, 10);
+	//Army o = Army(5, 10);
+	//Unit& u = *(a.getUnitsList()[0]);
 
+	Unit u = Unit(10, "?C1LDOPU<C4U!ALDOPU?aDOPU<a5O!EBO!N");
+	//std::unique_ptr<Action> action = u.getAction(a, o);
 	/*
 	std::unique_ptr<Extractor<float>>ex = std::unique_ptr<Extractor<float>>(new ExtractorValue(5));
 
 	std::cout << ex->get(*u, a, o) << std::endl;
 	*/
 
-	std::string test = AiCodeGenerator::generateAiCode();
-	std::stringstream code;
-	code << test;
-	DecisionNode dn = DecisionNode(code);
-	std::unique_ptr<Action> action = dn.get(u, a, o);
+	//std::string test = AiCodeGenerator::generateAiCode();
+	//std::stringstream code;
+	//code << test;
+	//DecisionNode dn = DecisionNode(code);
+	//std::unique_ptr<Action> action = dn.get(u, a, o);
 	std::cin.ignore();
 
 	return 0;

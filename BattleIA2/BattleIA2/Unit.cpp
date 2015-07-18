@@ -1,8 +1,7 @@
 #include "Unit.h"
 
-#include "Node.h"
 #include "AiCodeGenerator.h"
-#include "AiFactory.h"
+#include "NodeFactory.h"
 
 //static counter used for unique id creation
 int Unit::_idCount = 0;
@@ -26,6 +25,19 @@ void Unit::init()
 	this->_capacities.push_back(std::unique_ptr<Capacity>(new FirerateCapacity()));
 }
 
+Unit::Unit(int globalLevel, std::string aiCode)
+{
+	init();
+
+	_iaCode = aiCode;
+
+	std::stringstream streamCode;
+	streamCode << _iaCode;
+	_rootNode = NodeFactory::generateNode(streamCode);
+
+	while (globalLevel--)
+		this->_capacities[std::rand() % this->_capacities.size()]->upgrade();
+}
 
 //Constructor : global level will be randomly dispatched among the capacities
 Unit::Unit(int globalLevel)
@@ -46,7 +58,7 @@ Unit::Unit(int globalLevel)
 
 	std::stringstream streamCode;
 	streamCode << _iaCode;
-	//_rootNode = AiFactory::generateNode(streamCode);
+	_rootNode = NodeFactory::generateNode(streamCode);
 
 	while (globalLevel--)
 		this->_capacities[std::rand() % this->_capacities.size()]->upgrade();
@@ -59,6 +71,10 @@ Unit::Unit(std::string iaCode, int speedLevel, int lifeLevel, int armorLevel, in
 	init();
 
 	_iaCode = iaCode;
+
+	std::stringstream streamCode;
+	streamCode << _iaCode;
+	_rootNode = NodeFactory::generateNode(streamCode);
 	
 	getSpeed().upgrade(speedLevel);
 	getLife().upgrade(lifeLevel);
@@ -76,6 +92,10 @@ Unit::Unit(std::string iaCode, std::vector<int>& levels)
 	init();
 	
 	_iaCode = iaCode;
+
+	std::stringstream streamCode;
+	streamCode << _iaCode;
+	_rootNode = NodeFactory::generateNode(streamCode);
 	
 	for (unsigned int i = 0; i < levels.size() && i < _capacities.size(); ++i)
 		_capacities[i]->upgrade(levels[i]);
@@ -244,5 +264,10 @@ Unit Unit::load(std::istream& in)
 	});
 	in >> iacode;
 	return Unit(iacode, levels);
+}
+
+std::unique_ptr<Action> Unit::getAction(Army& a, Army& o)
+{
+	return _rootNode->get(*this, a, o);
 }
 

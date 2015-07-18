@@ -5,21 +5,20 @@
 
 #include <sstream>
 
+#include "Operator.h"
 #include "Node.h"
 #include "Extractor.h"
 
 #include "Action.h"
 
-#include "AiFactory.h"
-#include "ExtractorFactory.h"
-#include "OperatorFactory.h"
-
+#include "Unit.h"
+#include "Army.h"
 
 class DecisionNode : public Node
 {
 	private:
-		std::shared_ptr<Extractor<float>> _leftExtractor;
-		std::shared_ptr<Extractor<float>> _rightExtractor;
+		std::unique_ptr<Extractor<float>> _leftExtractor;
+		std::unique_ptr<Extractor<float>> _rightExtractor;
 
 		std::unique_ptr<Operator> _operator;
 
@@ -27,24 +26,9 @@ class DecisionNode : public Node
 		std::unique_ptr<Node> _rightNode;
 
 	public:
-		DecisionNode(std::stringstream& aiCode)
-		{
-			_leftExtractor = ExtractorFactory::getValueExtractor(aiCode);
-			_operator = OperatorFactory::generateOperator(aiCode);
-			_rightExtractor = ExtractorFactory::getValueExtractor(aiCode);
+		DecisionNode(std::stringstream& aiCode);
 
-			_leftNode = AiFactory::generateNode(aiCode);
-			_rightNode = AiFactory::generateNode(aiCode);
-		}
-
-
-
-		std::unique_ptr<Action> get(Unit& u, Army& a, Army& o)
-		{
-			if (_operator->GetResult(_leftExtractor, _rightExtractor, u, a, o))
-				return _leftNode->get(u, a, o);
-			return _rightNode->get(u, a, o);
-		}
+		std::unique_ptr<Action> get(Unit& u, Army& a, Army& o);
 };
 
 #endif //DECISION_NODE_H

@@ -12,11 +12,13 @@
 class ExtractorPointUnitPoint : public Extractor<Point>
 {
 	private:
-		std::shared_ptr< Extractor<Unit> > _eUnit;
+		std::unique_ptr< Extractor<Unit> > _eUnit;
 
 	public:
-		ExtractorPointUnitPoint(std::shared_ptr< Extractor<Unit> > eUnit)
-			: _eUnit(_eUnit) {};
+		ExtractorPointUnitPoint(std::unique_ptr< Extractor<Unit> > eUnit)
+		{
+			_eUnit = std::move(_eUnit);
+		};
 
 		Point get(Unit& u, Army& a, Army& o)
 		{
@@ -27,11 +29,13 @@ class ExtractorPointUnitPoint : public Extractor<Point>
 class ExtractorCentroidArmyPoint : public Extractor<Point>
 {
 	private:
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorCentroidArmyPoint(std::shared_ptr< Extractor<Army> > eArmy)
-			: _eArmy(eArmy) {};
+		ExtractorCentroidArmyPoint(std::unique_ptr< Extractor<Army> > eArmy)
+		{
+			_eArmy = std::move(eArmy);
+		};
 
 		Point get(Unit& u, Army& a, Army& o)
 		{

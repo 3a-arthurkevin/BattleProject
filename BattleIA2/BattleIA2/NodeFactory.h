@@ -6,9 +6,8 @@
 #include <sstream>
 
 #include "Node.h"
-#include "Operator.h"
 
-class AiFactory
+class NodeFactory
 {
 	public:
 		static std::unique_ptr<Node> generateNode(std::stringstream& aiCode);

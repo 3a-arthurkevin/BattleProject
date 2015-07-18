@@ -33,11 +33,14 @@ class ExtractorNMaxCxSetArmy : public Extractor<Army>
 	private:
 		int _nbElement;
 		int _indexCapacity; 
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorNMaxCxSetArmy(int nbElement, int indexCapacity, std::shared_ptr< Extractor<Army> > eArmy)
-			: _nbElement(nbElement), _indexCapacity(indexCapacity), _eArmy(eArmy) {};
+		ExtractorNMaxCxSetArmy(int nbElement, int indexCapacity, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _nbElement(nbElement), _indexCapacity(indexCapacity) 
+		{
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{
@@ -50,11 +53,14 @@ class ExtractorNMinCxSetArmy : public Extractor<Army>
 	private:
 		int _nbElement;
 		int _indexCapacity;
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorNMinCxSetArmy(int nbElement, int indexCapacity, std::shared_ptr< Extractor<Army> > eArmy)
-			: _nbElement(nbElement), _indexCapacity(indexCapacity), _eArmy(eArmy) {};
+		ExtractorNMinCxSetArmy(int nbElement, int indexCapacity, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _nbElement(nbElement), _indexCapacity(indexCapacity)
+		{
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{
@@ -67,12 +73,16 @@ class ExtractorNMaxDistancePointSetArmy : public Extractor<Army>
 {
 	private:
 		int _nbElement;
-		std::shared_ptr< Extractor<Point> > _ePoint;
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Point> > _ePoint;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorNMaxDistancePointSetArmy(int nbElement, std::shared_ptr< Extractor<Point> > ePoint, std::shared_ptr< Extractor<Army> > eArmy)
-			: _nbElement(nbElement), _ePoint(ePoint), _eArmy(eArmy) {};
+		ExtractorNMaxDistancePointSetArmy(int nbElement, std::unique_ptr< Extractor<Point> >& ePoint, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _nbElement(nbElement)
+		{
+			_ePoint = std::move(ePoint);
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{
@@ -84,12 +94,16 @@ class ExtractorNMinDistancePointSetArmy : public Extractor<Army>
 {
 	private:
 		int _nbElement;
-		std::shared_ptr< Extractor<Point> > _ePoint;
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Point> > _ePoint;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorNMinDistancePointSetArmy(int nbElement, std::shared_ptr< Extractor<Point> > ePoint, std::shared_ptr< Extractor<Army> > eArmy)
-			: _nbElement(nbElement), _ePoint(ePoint), _eArmy(eArmy) {};
+		ExtractorNMinDistancePointSetArmy(int nbElement, std::unique_ptr< Extractor<Point> >& ePoint, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _nbElement(nbElement)
+		{
+			_ePoint = std::move(ePoint);
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{
@@ -102,12 +116,16 @@ class ExtractorTCxGreaterValueSetArmy : public Extractor<Army>
 {
 	private:
 		int _indexCapacity;
-		std::shared_ptr< Extractor<float> > _eValue;
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<float> > _eValue;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorTCxGreaterValueSetArmy(int indexCapacity, std::shared_ptr< Extractor<float> > eValue, std::shared_ptr< Extractor<Army> > eArmy)
-			: _indexCapacity(_indexCapacity), _eValue(eValue), _eArmy(eArmy) {};
+		ExtractorTCxGreaterValueSetArmy(int indexCapacity, std::unique_ptr< Extractor<float> >& eValue, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _indexCapacity(_indexCapacity)
+		{
+			_eValue = std::move(eValue);
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{
@@ -119,12 +137,16 @@ class ExtractorTCxSmallerValueSetArmy : public Extractor<Army>
 {
 	private:
 		int _indexCapacity;
-		std::shared_ptr< Extractor<float> > _eValue;
-		std::shared_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<float> > _eValue;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 
 	public:
-		ExtractorTCxSmallerValueSetArmy(int indexCapacity, std::shared_ptr< Extractor<float> > eValue, std::shared_ptr< Extractor<Army> > eArmy)
-			: _indexCapacity(_indexCapacity), _eValue(eValue), _eArmy(eArmy) {};
+		ExtractorTCxSmallerValueSetArmy(int indexCapacity, std::unique_ptr< Extractor<float> >& eValue, std::unique_ptr< Extractor<Army> >& eArmy)
+			: _indexCapacity(_indexCapacity)
+		{
+			_eValue = std::move(eValue);
+			_eArmy = std::move(eArmy);
+		};
 
 		Army get(Unit& u, Army& a, Army& o)
 		{

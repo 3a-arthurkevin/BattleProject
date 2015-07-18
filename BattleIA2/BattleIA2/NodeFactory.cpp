@@ -1,12 +1,14 @@
-#include "AiFactory.h"
-
-#include "Greater.h"
-#include "Smaller.h"
+#include "NodeFactory.h"
 
 #include "ActionNode.h"
 #include "DecisionNode.h"
 
-std::unique_ptr<Node> AiFactory::generateNode(std::stringstream& aiCode)
+#include "ShotAction.h"
+#include "MoveAction.h"
+#include "EscapeAction.h"
+#include "EmptyAction.h"
+
+std::unique_ptr<Node> NodeFactory::generateNode(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try

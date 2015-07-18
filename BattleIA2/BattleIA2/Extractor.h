@@ -4,13 +4,13 @@
 #define EXTRACTOR_H
 
 #include "Army.h"
-//#include "AiFactory.h"
+#include "Unit.h"
 
-template <typename returnType>
+template <typename RETURN_TYPE>
 class Extractor
 {
 	public:
-		virtual returnType get(Unit& u, Army& a, Army& o) = 0;
+		virtual RETURN_TYPE get(Unit& u, Army& a, Army& o) = 0;
 };
 
 #endif //EXTRACTOR_H

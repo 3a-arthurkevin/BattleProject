@@ -64,17 +64,18 @@ class Army
 		}
 
 		//Return the unit with the given ID
-		Unit& getUnit(int id)
+		Unit& getUnit(int id);
+		/*
 		{
 			auto it = std::find_if(_units.begin(), _units.end(), [id](const std::shared_ptr<Unit>& unit) {
-				return unit->getId() == id;
+				return (unit->getId() == id);
 			});
 			if (it == _units.end())
 				throw std::invalid_argument("wrong id : unit " + std::to_string(id) + " not found");
 			
 			return *(it->get());
 		}
-
+		*/
 
 		//Get the unit the closest from the given position
 		Unit& getNearestUnit(const Point& p);

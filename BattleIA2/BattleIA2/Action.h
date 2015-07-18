@@ -3,7 +3,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include "Army.h"
+//#include "Army.h"
 
 //Interface representing action returned by AI
 class Action

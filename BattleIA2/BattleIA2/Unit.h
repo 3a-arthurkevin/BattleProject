@@ -24,9 +24,7 @@
 #include "ArmorCapacity.h"
 #include "Point.h"
 
-//#include "Node.h"
-
-//class Node;
+#include "Node.h"
 
 //Class representing a unit, i.e. element of an army
 class Unit
@@ -42,7 +40,7 @@ class Unit
 		std::string _iaCode;
 
 		//Tree of the unit's AI
-		//std::unique_ptr<Node> _rootNode;
+		std::unique_ptr<Node> _rootNode;
 
 		//vector of the unit's capacities
 		//order is : speed, life, armor, regen, damage, range, firerate
@@ -56,6 +54,8 @@ class Unit
 		void init();
 
 	public:
+		Unit(int globalLevel, std::string aiCode);
+
 		//Constructor : global level will be randomly dispatched among the capacities
 		Unit(int globalLevel);
 
@@ -88,11 +88,12 @@ class Unit
 
 		//provide the Root Node of the unit's AI
 		
-		//Node& getRootNode()
-		//{
-		//	return (*_rootNode);
-		//}
-		
+		std::unique_ptr<Action> getAction(Army& a, Army& o);
+		/*
+		{
+			return *(_rootNode);
+		}
+		*/
 
 		//Provide the speed capacity of the unit
 		SpeedCapacity& getSpeed()

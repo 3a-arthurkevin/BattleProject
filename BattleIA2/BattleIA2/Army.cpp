@@ -1,6 +1,5 @@
 #include "Army.h"
 
-
 void Army::copyUnits(const std::vector<std::shared_ptr<Unit> >& units)
 {
 	_units.clear();
@@ -49,6 +48,16 @@ Army& Army::operator=(Army army)
 	return *this;
 }
 
+Unit& Army::getUnit(int id)
+{
+	auto it = std::find_if(_units.begin(), _units.end(), [id](const std::shared_ptr<Unit>& unit) {
+		return (unit->getId() == id);
+	});
+	if (it == _units.end())
+		throw std::invalid_argument("wrong id : unit " + std::to_string(id) + " not found");
+
+	return *(it->get());
+}
 
 Unit& Army::getNearestUnit(const Point& p)
 {

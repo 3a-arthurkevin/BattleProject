@@ -23,12 +23,15 @@ class ExtractorUnit : public Extractor<Unit>
 class ExtractorMaxCxArmyUnit : public Extractor<Unit>
 {
 	private:
-		std::shared_ptr< Extractor<Army> >_eArmy;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMaxCxArmyUnit(std::shared_ptr< Extractor<Army> > eArmy, int indexCapacity)
-			: _eArmy(eArmy), _indexCapacity(indexCapacity){};
+		ExtractorMaxCxArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity)
+			: _indexCapacity(indexCapacity)
+		{
+			_eArmy = std::move(eArmy);
+		};
 
 		Unit get(Unit& u, Army& a, Army& o)
 		{
@@ -39,12 +42,15 @@ class ExtractorMaxCxArmyUnit : public Extractor<Unit>
 class ExtractorMinCxArmyUnit : public Extractor<Unit>
 {
 	private:
-		std::shared_ptr< Extractor<Army> >_eArmy;
+		std::unique_ptr< Extractor<Army> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMinCxArmyUnit(std::shared_ptr< Extractor<Army> > eArmy, int indexCapacity)
-			: _eArmy(eArmy), _indexCapacity(indexCapacity){};
+		ExtractorMinCxArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity)
+			:  _indexCapacity(indexCapacity)
+		{
+			_eArmy = std::move(eArmy);
+		};
 
 		Unit get(Unit& u, Army& a, Army& o)
 		{
@@ -56,12 +62,15 @@ class ExtractorMinCxArmyUnit : public Extractor<Unit>
 class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit>
 {
 	private:
-		std::shared_ptr< Extractor<Army> > _eArmy;
-		std::shared_ptr< Extractor<Point> >_ePoint;
+		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMaxDistancePointArmyUnit(std::shared_ptr< Extractor<Army> > eArmy, std::shared_ptr< Extractor<Point> > ePoint)
-			: _eArmy(eArmy), _ePoint(ePoint){};
+		ExtractorMaxDistancePointArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		{
+			_eArmy = std::move(eArmy); 
+			_ePoint = std::move(ePoint);
+		}
 
 		Unit get(Unit& u, Army& a, Army& o)
 		{
@@ -74,12 +83,15 @@ class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit>
 class ExtractorMinDistancePointArmyUnit : public Extractor<Unit>
 {
 	private:
-		std::shared_ptr< Extractor<Army> > _eArmy;
-		std::shared_ptr< Extractor<Point> >_ePoint;
+		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMinDistancePointArmyUnit(std::shared_ptr< Extractor<Army> > eArmy, std::shared_ptr< Extractor<Point> > ePoint)
-			: _eArmy(eArmy), _ePoint(ePoint){};
+		ExtractorMinDistancePointArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		{
+			_eArmy = std::move(eArmy);
+			_ePoint = std::move(ePoint);
+		};
 
 		Unit get(Unit& u, Army& a, Army& o)
 		{
