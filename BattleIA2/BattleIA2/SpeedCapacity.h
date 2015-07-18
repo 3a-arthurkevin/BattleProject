@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef SPEED_CAPACITY_H
+#define SPEED_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the speed capactiy of an unit
@@ -18,3 +21,4 @@ class SpeedCapacity : public Capacity
 		}
 };
 
+#endif //SPEED_CAPACITY_H

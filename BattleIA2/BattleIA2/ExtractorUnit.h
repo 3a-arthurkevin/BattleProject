@@ -1,10 +1,13 @@
 #pragma once
 
+#ifndef EXTRACTOR_UNIT_H
+#define EXTRACTOR_UNIT_H
+
 #include "Extractor.h"
 
-#include "ExtractorUnit.h"
-#include "ExtractorArmy.h"
-#include "ExtractorPoint.h"
+//#include "ExtractorUnit.h"
+//#include "ExtractorArmy.h"
+//#include "ExtractorPoint.h"
 
 class ExtractorUnit : public Extractor<Unit>
 {
@@ -85,3 +88,5 @@ class ExtractorMinDistancePointArmyUnit : public Extractor<Unit>
 			return (_eArmy->get(u, a, o).getNearestUnit(p));
 		}
 };
+
+#endif //EXTRACTOR_UNIT_H

@@ -1,13 +1,19 @@
 #pragma once
 
-#include <sstream>
+#ifndef DECISION_NODE_H
+#define DECISION_NODE_H
 
-#include "AiFactory.h"
-#include "ExtractorFactory.h"
+#include <sstream>
 
 #include "Node.h"
 #include "Extractor.h"
-#include "Operator.h"
+
+#include "Action.h"
+
+#include "AiFactory.h"
+#include "ExtractorFactory.h"
+#include "OperatorFactory.h"
+
 
 class DecisionNode : public Node
 {
@@ -24,12 +30,14 @@ class DecisionNode : public Node
 		DecisionNode(std::stringstream& aiCode)
 		{
 			_leftExtractor = ExtractorFactory::getValueExtractor(aiCode);
-			_operator = AiFactory::generateOperator(aiCode);
+			_operator = OperatorFactory::generateOperator(aiCode);
 			_rightExtractor = ExtractorFactory::getValueExtractor(aiCode);
 
 			_leftNode = AiFactory::generateNode(aiCode);
 			_rightNode = AiFactory::generateNode(aiCode);
 		}
+
+
 
 		std::unique_ptr<Action> get(Unit& u, Army& a, Army& o)
 		{
@@ -39,3 +47,4 @@ class DecisionNode : public Node
 		}
 };
 
+#endif //DECISION_NODE_H

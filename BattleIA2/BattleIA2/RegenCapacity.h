@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef REGEN_CAPACITY_H
+#define REGEN_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the regen capactiy of an unit
@@ -18,3 +21,4 @@ class RegenCapacity : public Capacity
 		}
 };
 
+#endif //REGEN_CAPACITY_H

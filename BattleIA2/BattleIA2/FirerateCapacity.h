@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef FIRE_RATE_CAPACITY_H
+#define FIRE_RATE_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the firerate capacity of an unit
@@ -40,3 +43,4 @@ class FirerateCapacity : public Capacity
 		}
 };
 
+#endif //FIRE_RATE_CAPACITY_H

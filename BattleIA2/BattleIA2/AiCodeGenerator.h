@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef AI_CODE_GENERATOR_H
+#define AI_CODE_GENERATOR_H
+
 #include <iostream>
 #include <string> 
 
@@ -20,5 +23,6 @@ class AiCodeGenerator
 		static std::string generateAiCode();
 };
 
+#endif //AI_CODE_GENERATOR_H
 
 

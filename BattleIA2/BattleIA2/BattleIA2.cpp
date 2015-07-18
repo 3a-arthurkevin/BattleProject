@@ -80,7 +80,7 @@ int main(void)
 	std::stringstream code;
 	code << test;
 	DecisionNode dn = DecisionNode(code);
-	dn.get(u, a, o);
+	std::unique_ptr<Action> action = dn.get(u, a, o);
 	std::cin.ignore();
 
 	return 0;

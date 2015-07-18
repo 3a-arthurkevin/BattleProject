@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef POINT_H
+#define POINT_H
+
 #include <cmath>
 #include <ostream>
 #include <iomanip>
@@ -157,3 +160,5 @@ inline std::ostream& operator<<(std::ostream& out, const Point& p)
 	out << std::fixed << std::setprecision(1) << "(" << p.getX() << "," << p.getY() << ")";
 	return out;
 }
+
+#endif POINT_H

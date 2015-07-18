@@ -1,23 +1,20 @@
 #pragma once
 
+#ifndef UNIT_H
+#define UNIT_H
+
 #include <memory>
-
 #include <vector>
-
 #include <string>
-
 #include <ostream>
 #include <istream>
 #include <iostream>
-
 #include <cstdlib>
-
 #include <algorithm>
 #include <numeric>
 
 #include <cmath>
 
-#include "Capacity.h"
 #include "SpeedCapacity.h"
 #include "LifeCapacity.h"
 #include "RegenCapacity.h"
@@ -27,7 +24,9 @@
 #include "ArmorCapacity.h"
 #include "Point.h"
 
+//#include "Node.h"
 
+//class Node;
 
 //Class representing a unit, i.e. element of an army
 class Unit
@@ -41,6 +40,9 @@ class Unit
 
 		//code representing the AI used by the unit
 		std::string _iaCode;
+
+		//Tree of the unit's AI
+		//std::unique_ptr<Node> _rootNode;
 
 		//vector of the unit's capacities
 		//order is : speed, life, armor, regen, damage, range, firerate
@@ -83,6 +85,14 @@ class Unit
 		{
 			return _iaCode;
 		}
+
+		//provide the Root Node of the unit's AI
+		
+		//Node& getRootNode()
+		//{
+		//	return (*_rootNode);
+		//}
+		
 
 		//Provide the speed capacity of the unit
 		SpeedCapacity& getSpeed()
@@ -199,12 +209,13 @@ class Unit
 };
 
 //Shift operator overloading, printing the unit in the output stream.
-inline std::ostream& operator<<(std::ostream& out, const Unit& unit)
+inline std::ostream& operator<<(std::ostream& out, const std::shared_ptr<Unit> unit)
 {
-	out << "Unit#" << unit.getId() << "[" << unit.getIACode();
+	out << "Unit#" << unit->getId() << "[" << unit->getIACode();
 	for (int i = 0; i < 7; i++)
-		out << "; " << (unit).getCapacity(i)->getLevel();
+		out << "; " << unit->getCapacity(i)->getLevel();
 	out << "]";
 	return out;
 }
 
+#endif // UNIT_H

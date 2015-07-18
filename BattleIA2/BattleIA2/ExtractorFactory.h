@@ -1,8 +1,11 @@
 #pragma once
 
+#ifndef EXTRACTOR_FACTORY_H
+#define EXTRACTOR_FACTORY_H
+
 #include <sstream>
 
-#include "Extractor.h"
+//#include "Extractor.h"
 #include "ExtractorValue.h"
 #include "ExtractorUnit.h"
 #include "ExtractorArmy.h"
@@ -18,3 +21,4 @@ class ExtractorFactory
 		static std::shared_ptr<Extractor<Army>> getArmyExtractor(std::stringstream& iaCode);
 };
 
+#endif //EXTRACTOR_FACTORY_H

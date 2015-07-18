@@ -1,11 +1,14 @@
 #pragma once
 
+#ifndef TRAINING_H
+#define TRAINING_H
+
 #include <memory>
 #include <vector>
 #include <iterator>
 
+#include "Rectangle.h"
 #include "Army.h"
-
 #include "Battle.h"
 
 
@@ -28,3 +31,4 @@ Point getRandomPosition(const Rectangle& arena);
 std::unique_ptr<Army> train(const Rectangle& arena, int iterations, int threshold, int populationSize, int armySize, int unitLevel, std::shared_ptr<Army>& champions);
 
 
+#endif //TRAINING_H

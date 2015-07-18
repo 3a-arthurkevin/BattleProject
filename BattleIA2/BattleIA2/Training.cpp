@@ -1,5 +1,6 @@
 #include "Training.h"
 
+#include "AiFactory.h"
 
 //struct storing together an army and its score,
 //usefull for storing and sorting the armies

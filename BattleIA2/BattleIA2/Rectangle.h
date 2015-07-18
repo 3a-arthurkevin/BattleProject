@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
 #include "Point.h"
 
 class Rectangle
@@ -89,3 +92,4 @@ class Rectangle
 
 std::ostream & operator << (std::ostream & out, const Rectangle & p_rectangle);
 
+#endif RECTANGLE_H

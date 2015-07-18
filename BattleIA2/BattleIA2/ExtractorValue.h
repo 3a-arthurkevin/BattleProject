@@ -1,10 +1,13 @@
 #pragma once
 
+#ifndef EXTRACTOR_VALUE_H
+#define EXTRACTOR_VALUE_H
+
 #include "Extractor.h"
 
-#include "ExtractorUnit.h"
-#include "ExtractorArmy.h"
-#include "ExtractorPoint.h"
+//#include "ExtractorUnit.h"
+//#include "ExtractorArmy.h"
+//#include "ExtractorPoint.h"
 
 class ExtractorValue : public Extractor<float>
 {
@@ -157,3 +160,5 @@ class ExtractorAvgDistancePointArmyValue : public Extractor<float>
 			return (_eArmy->get(u, a, o).getAverageDistance(_ePoint->get(u, a, o)));
 		}
 };
+
+#endif //EXTRACTOR_VALUE_H

@@ -1,14 +1,18 @@
 #pragma once
 
+#ifndef AI_H
+#define AI_H
+
+
 #include <iostream>
 #include <memory>
 
-#include "Action.h"
+//#include "Action.h"
 #include "MoveAction.h"
 #include "ShotAction.h"
 #include "EmptyAction.h"
 
-#include "Unit.h"
+//#include "Unit.h"
 #include "Army.h"
 #include "Rectangle.h"
 
@@ -21,3 +25,5 @@ class AI
 		//Return the action which have to be done by the unit in this context
 		std::unique_ptr<Action> operator()(Unit& unit, Army& allies, Army& opponents, const Rectangle& arena);
 };
+
+#endif //AI_H

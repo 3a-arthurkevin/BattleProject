@@ -1,5 +1,9 @@
 #include "Unit.h"
 
+#include "Node.h"
+#include "AiCodeGenerator.h"
+#include "AiFactory.h"
+
 //static counter used for unique id creation
 int Unit::_idCount = 0;
 
@@ -27,6 +31,7 @@ void Unit::init()
 Unit::Unit(int globalLevel)
 {
 	init();
+	/*
 	if (std::rand() % 2)
 		this->_iaCode = "L";
 	else 
@@ -36,6 +41,12 @@ Unit::Unit(int globalLevel)
 		this->_iaCode += "D";
 	else 
 		this->_iaCode += '0' + (char)(rand() % 7);
+	*/
+	_iaCode = AiCodeGenerator::generateAiCode();
+
+	std::stringstream streamCode;
+	streamCode << _iaCode;
+	//_rootNode = AiFactory::generateNode(streamCode);
 
 	while (globalLevel--)
 		this->_capacities[std::rand() % this->_capacities.size()]->upgrade();

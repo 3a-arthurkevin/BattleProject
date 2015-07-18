@@ -86,6 +86,7 @@
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="BattleIA2.cpp" />
     <ClCompile Include="ExtractorFactory.cpp" />
+    <ClCompile Include="OperatorFactory.cpp" />
     <ClCompile Include="Training.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="MoveAction.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Operator.h" />
+    <ClInclude Include="OperatorFactory.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RangeCapacity.h" />
     <ClInclude Include="Rectangle.h" />

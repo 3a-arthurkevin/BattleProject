@@ -1,5 +1,8 @@
 #include "Battle.h"
 
+#include "AI.h"
+#include "Action.h"
+
 //Struct used to manipulate a unit together with its army and its opponents
 struct UnitChoice
 {

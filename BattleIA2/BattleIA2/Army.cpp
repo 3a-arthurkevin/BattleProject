@@ -1,5 +1,6 @@
 #include "Army.h"
 
+
 void Army::copyUnits(const std::vector<std::shared_ptr<Unit> >& units)
 {
 	_units.clear();
@@ -54,7 +55,7 @@ Unit& Army::getNearestUnit(const Point& p)
 	if (_units.empty())
 		throw std::invalid_argument("empty army");
 	
-	Unit* result = nullptr;
+	Unit* result;
 	float minDist = std::numeric_limits<float>::max();
 	for (auto it = _units.begin(); it != _units.end(); ++it)
 	{
@@ -65,7 +66,7 @@ Unit& Army::getNearestUnit(const Point& p)
 			result = it->get();
 		}
 	}
-	return *result;
+	return (*result);
 }
 
 Unit& Army::getFurthestUnit(const Point& p)
@@ -73,7 +74,7 @@ Unit& Army::getFurthestUnit(const Point& p)
 	if (_units.empty())
 		throw std::invalid_argument("empty army");
 	
-	Unit* result = nullptr;
+	Unit* result;
 	float maxDist = 0.0f;
 	for (auto it = _units.begin(); it != _units.end(); ++it)
 	{
@@ -84,7 +85,7 @@ Unit& Army::getFurthestUnit(const Point& p)
 			result = it->get();
 		}
 	}
-	return *result;
+	return (*result);
 }
 
 Unit& Army::getLowestUnit(int capa_index)

@@ -1,6 +1,11 @@
 #pragma once
 
+#ifndef GREATER_H
+#define GREATER_H
+
 #include "Operator.h"
+#include "Extractor.h"
+
 #include "Unit.h"
 #include "Army.h"
 
@@ -15,3 +20,4 @@ class Greater : public Operator
 		}
 };
 
+#endif //GREATER_H

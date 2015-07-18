@@ -1,10 +1,16 @@
 #pragma once
 
+#ifndef ACTION_NODE_H
+#define ACTION_NODE_H
+
+#include "Unit.h"
+#include"Army.h"
+#include "Point.h"
+
 #include "ExtractorFactory.h"
 #include "Extractor.h"
-#include "Action.h"
-#include "Node.h"
 
+#include "Action.h"
 #include "ShotAction.h"
 #include "MoveAction.h"
 #include "EscapeAction.h"
@@ -71,3 +77,5 @@ class EmptyActionNode : public Node
 			return std::unique_ptr<EmptyAction>(new EmptyAction(u));
 		}
 };
+
+#endif //ACTION_NODE_H

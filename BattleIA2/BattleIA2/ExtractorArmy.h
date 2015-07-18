@@ -1,10 +1,13 @@
 #pragma once
 
+#ifndef EXTRACTOR_ARMY_H
+#define EXTRACTOR_ARMY_H
+
 #include "Extractor.h"
 
-#include "ExtractorUnit.h"
-#include "ExtractorArmy.h"
-#include "ExtractorPoint.h"
+//#include "ExtractorUnit.h"
+//#include "ExtractorArmy.h"
+//#include "ExtractorPoint.h"
 
 class ExtractorArmyA : public Extractor<Army>
 {
@@ -128,3 +131,5 @@ class ExtractorTCxSmallerValueSetArmy : public Extractor<Army>
 			return (_eArmy->get(u, a, o).getSubArmyCapacitySmaller(_indexCapacity, _eValue->get(u, a, o)));
 		}
 };
+
+#endif //EXTRACTOR_POINT_H

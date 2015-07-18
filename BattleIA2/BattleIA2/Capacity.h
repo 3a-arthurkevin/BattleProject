@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef CAPACITY_H
+#define CAPACITY_H
+
 class Capacity
 {
 	protected:
@@ -46,3 +49,4 @@ class Capacity
 		}
 };
 
+#endif //CAPACITY_H

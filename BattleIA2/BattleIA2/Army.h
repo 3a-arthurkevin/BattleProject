@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef ARMY_H
+#define ARMY_H
+
 #include <vector>
 
 #include <memory>
@@ -139,8 +142,10 @@ inline std::ostream& operator<<(std::ostream& out, const Army& army)
 	out << "====================ARMY====================================" << std::endl;
 	std::vector<std::shared_ptr<Unit> >& units = const_cast<Army&>(army).getUnitsList();
 	for (auto it = units.begin(); it != units.end(); ++it)
-		out << **it << std::endl;
+		out << (*it) << std::endl;
 	out << "===================/ARMY====================================" << std::endl;
 
 	return out;
 };
+
+#endif //ARMY_H

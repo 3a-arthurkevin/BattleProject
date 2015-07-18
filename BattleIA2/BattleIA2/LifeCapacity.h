@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef LIFE_CAPACITY_H
+#define LIFE_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the life capacity of an unit
@@ -41,3 +44,4 @@ class LifeCapacity : public Capacity
 		}
 };
 
+#endif //LIFE_CAPACITY_H

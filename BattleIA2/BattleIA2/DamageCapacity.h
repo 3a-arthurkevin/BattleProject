@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef DAMAGE_CAPACITY_H
+#define DAMAGE_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the damage capacity of an unit
@@ -18,3 +21,4 @@ class DamageCapacity : public Capacity
 		}
 };
 
+#endif //DAMAGE_CAPACITY_H

@@ -1,33 +1,38 @@
 #pragma once
 
+#ifndef ESCAPE_ACTION_H
+#define ESCAPE_ACTION_H
+
 #include <iostream>
 
 #include "Unit.h"
-#include "Action.h"
 #include "Point.h"
+#include "Action.h"
 
 //Class representing the action to move a unit in direction of a specific position
 class EscapeAction : public Action
 {
 private:
-	Unit* _unit;
+	Unit& _unit;
 	Point _positionToAvoid;
 
 public:
 	//Constructor taking in paramters the unit to move and the destination
 	EscapeAction(Unit& unit, const Point& position)
-		: _unit(&unit), _positionToAvoid(position) {}
+		: _unit(unit), _positionToAvoid(position) {}
 
 	//Run the action
 	//Log parameter indicate if we write something or not on the standard output
 	void execute(bool log = false)
 	{
 		if (log)
-			std::cout << "Unit " << _unit->getId() << " escape from " << _unit->getPosition();
+			std::cout << "Unit " << _unit.getId() << " escape from " << _unit.getPosition();
 
-		_unit->escapeFromPosition(_positionToAvoid);
+		_unit.escapeFromPosition(_positionToAvoid);
 
 		if (log)
-			std::cout << " to " << _unit->getPosition() << std::endl;
+			std::cout << " to " << _unit.getPosition() << std::endl;
 	}
 };
+
+#endif //ESCAPE_ACTION_H

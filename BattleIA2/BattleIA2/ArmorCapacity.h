@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef ARMOR_CAPACITY_H
+#define ARMOR_CAPACITY_H
+
 #include "Capacity.h"
 
 //Class representing the armor capacity of an unit
@@ -18,4 +21,4 @@ class ArmorCapacity : public Capacity
 		}
 };
 
-
+#endif //ARMOR_CAPACITY_H

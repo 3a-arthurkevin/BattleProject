@@ -1,10 +1,13 @@
 #pragma once
 
+#ifndef EXTRACTOR_POINT_H
+#define EXTRACTOR_POINT_H
+
 #include "Extractor.h"
 
-#include "ExtractorUnit.h"
-#include "ExtractorArmy.h"
-#include "ExtractorPoint.h"
+//#include "ExtractorUnit.h"
+//#include "ExtractorArmy.h"
+//#include "ExtractorPoint.h"
 
 class ExtractorPointUnitPoint : public Extractor<Point>
 {
@@ -35,3 +38,5 @@ class ExtractorCentroidArmyPoint : public Extractor<Point>
 			return (_eArmy->get(u, a, o).getCentroid());
 		}
 };
+
+#endif //EXTRACTOR_POINT_H

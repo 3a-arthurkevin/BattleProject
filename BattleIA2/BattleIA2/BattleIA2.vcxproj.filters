@@ -46,9 +46,6 @@
     <Filter Include="Fichiers d%27en-tête\AI">
       <UniqueIdentifier>{ed63fe42-7da6-49c3-985e-8a3dcc3293c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Extractors">
-      <UniqueIdentifier>{ce63bde8-eaf5-42f4-9157-2d648a443182}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Nodes">
       <UniqueIdentifier>{e8d76f16-c9cd-4b24-8b70-22f6aa086fc2}</UniqueIdentifier>
     </Filter>
@@ -61,11 +58,11 @@
     <Filter Include="Fichiers d%27en-tête\Operators\BaseClass">
       <UniqueIdentifier>{caf57c89-b0b4-4722-86c1-866ca41a2ca1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Factory">
-      <UniqueIdentifier>{41830dc4-bd4e-4f3d-b98c-39c08658684b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\Factories">
       <UniqueIdentifier>{cbee7747-58a3-4140-b6cc-e3196381af4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Factories">
+      <UniqueIdentifier>{41830dc4-bd4e-4f3d-b98c-39c08658684b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +94,9 @@
       <Filter>Fichiers sources\Factories</Filter>
     </ClCompile>
     <ClCompile Include="AiCodeGenerator.cpp">
+      <Filter>Fichiers sources\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="OperatorFactory.cpp">
       <Filter>Fichiers sources\Factories</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,7 +135,7 @@
       <Filter>Fichiers d%27en-tête\Battle</Filter>
     </ClInclude>
     <ClInclude Include="ExtractorFactory.h">
-      <Filter>Fichiers d%27en-tête\Factory</Filter>
+      <Filter>Fichiers d%27en-tête\Factories</Filter>
     </ClInclude>
     <ClInclude Include="ExtractorValue.h">
       <Filter>Fichiers d%27en-tête\Extractors</Filter>
@@ -195,13 +195,16 @@
       <Filter>Fichiers d%27en-tête\Operators\BaseClass</Filter>
     </ClInclude>
     <ClInclude Include="AiFactory.h">
-      <Filter>Fichiers d%27en-tête\Factory</Filter>
+      <Filter>Fichiers d%27en-tête\Factories</Filter>
     </ClInclude>
     <ClInclude Include="EscapeAction.h">
       <Filter>Fichiers d%27en-tête\Actions</Filter>
     </ClInclude>
     <ClInclude Include="AiCodeGenerator.h">
-      <Filter>Fichiers d%27en-tête\Factory</Filter>
+      <Filter>Fichiers d%27en-tête\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorFactory.h">
+      <Filter>Fichiers d%27en-tête\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
