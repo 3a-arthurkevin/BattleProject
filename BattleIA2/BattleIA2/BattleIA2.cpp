@@ -61,7 +61,6 @@ int main(void)
 	out.close();
 
 	std::cin.ignore();
-
 	return 0;
 }
 
