@@ -25,11 +25,11 @@ int main(void)
 
 	std::shared_ptr<Army> champions;
 
-	int iteration = 100;
-	int threshold = 500;
-	int populationSize = 10;
-	int armySize = 5;
-	int unitLevel = 5;
+	int iteration = 10;
+	int threshold = 20;
+	int populationSize = 3;
+	int armySize = 10;
+	int unitLevel = 10;
 
 	if ( (threshold >= ((populationSize - 1) * armySize)) || threshold <= 0 )
 		threshold = ((populationSize - 1) * armySize) / 2;

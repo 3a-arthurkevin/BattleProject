@@ -77,8 +77,7 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 	std::string extractorValueCode;
 	extractorValueCode.clear();
 
-	//int randomValue = rand() % 5 + 1;
-	int randomValue = rand() % 2 + 1;
+	int randomValue = rand() % 5 + 1;
 
 	//Case [val]
 	if(randomValue == 1)
@@ -91,7 +90,7 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 		std::string indexCapacity = std::to_string(rand() % 7);
 		extractorValueCode += ('C' + indexCapacity + generateExtractorUnitCode());
 	}
-	/*
+	
 	//Case D<Unit><Point>
 	else if (randomValue == 3)
 	{
@@ -134,7 +133,7 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 			extractorValueCode += ("aD" + generateExtractorArmyCode() + generateExtractorPointCode());
 		}
 	}
-	*/
+	
 	return extractorValueCode;
 }
 
@@ -144,8 +143,7 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 	std::string extractorUnitCode;
 	extractorUnitCode.clear();
 
-	//int randomValue = rand() % 3 + 1;
-	int randomValue = rand() % 2 + 1;
+	int randomValue = rand() % 3 + 1;
 
 	//Case U
 	if (randomValue == 1)
@@ -167,7 +165,7 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 			extractorUnitCode += ('H' + indexCapacity + generateExtractorArmyCode());
 		}
 	}
-	/*
+	
 	//Case LD<Set><Point> | HD<Set><Point>
 	else
 	{
@@ -182,7 +180,7 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 			extractorUnitCode += ("HD" + generateExtractorArmyCode() + generateExtractorPointCode());
 		}
 	}
-	*/
+
 	return extractorUnitCode;
 }
 
@@ -214,8 +212,7 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 	std::string extractorArmyCode;
 	extractorArmyCode.clear();
 
-	//int randomValue = rand() % 4 + 1;
-	int randomValue = rand() % 2 + 1;
+	int randomValue = rand() % 4 + 1;
 
 	//Case A
 	if (randomValue == 1)
@@ -227,7 +224,6 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 	{
 		extractorArmyCode += 'O';
 	}
-	/*
 	//Case TL0-6[val]<Set> | TH0-6[val]<Set>
 	else if (randomValue == 3)
 	{
@@ -244,7 +240,6 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 			extractorArmyCode += ("TH" + indexCapacity +  strValue +  generateExtractorArmyCode());
 		}
 	}
-	
 	//Case NL0-6<Set> | NH0-6<Set>
 	//Case NLD<Point><Set> |  NLD<Point><Set>
 	else
@@ -284,7 +279,6 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 		}
 		
 	}
-	*/
 	return extractorArmyCode;
 }
 

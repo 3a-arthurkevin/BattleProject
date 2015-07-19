@@ -27,7 +27,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 	Army B = b;
 	AI ai;
 	int turn = 0;
-	while (A.size()>0 && B.size()>0 && ++turn <= /*10000*/50) 
+	while (A.size()>0 && B.size()>0 && ++turn <= /*10000*/100) 
 	{
 		if (log)
 		{
@@ -84,7 +84,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 		}
 		else
 		{
-			std::cout << "No army defeated after 500 turns" << std::endl;
+			std::cout << "No army defeated after 100 turns" << std::endl;
 			std::cout << "Army A score : " << A.size() << "  |  Army B score : " << B.size() << std::endl;
 		}
 	}

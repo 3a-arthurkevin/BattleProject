@@ -287,18 +287,20 @@ Army Army::getNthLowestUnit(int nbElement, int indexCapacity)
 {
 	try
 	{
-		int nbUnit = _units.size();
-		if (nbElement >= nbUnit)
-			nbElement = nbUnit - 1;
-
-		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
-			[indexCapacity](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (a->getCapacity(indexCapacity)->getLevel() < b->getCapacity(indexCapacity)->getLevel());
-		});
-
 		Army subArmy(0, 0);
-		subArmy.copyUnits(_units, nbElement);
+		int nbUnit = _units.size();
+		if (nbUnit > 0)
+		{
+			if (nbElement >= nbUnit)
+				nbElement = nbUnit - 1;
 
+			std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
+				[indexCapacity](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
+				return (a->getCapacity(indexCapacity)->getLevel() < b->getCapacity(indexCapacity)->getLevel());
+			});
+
+			subArmy.copyUnits(_units, nbElement);
+		}
 		return subArmy;
 	}
 	catch (...)
@@ -312,19 +314,21 @@ Army Army::getNthHighestUnit(int nbElement, int indexCapacity)
 {
 	try
 	{
-		int nbUnit = _units.size();
-		if (nbElement >= nbUnit)
-			nbElement = nbUnit - 1;
-
-		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
-			[indexCapacity](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (a->getCapacity(indexCapacity)->getLevel() > b->getCapacity(indexCapacity)->getLevel());
-		});
-
-		
 		Army subArmy(0, 0);
-		subArmy.copyUnits(_units, nbElement);
 
+		int nbUnit = _units.size();
+		if (nbUnit > 0)
+		{
+			if (nbElement >= nbUnit)
+				nbElement = nbUnit - 1;
+
+			std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
+				[indexCapacity](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
+				return (a->getCapacity(indexCapacity)->getLevel() > b->getCapacity(indexCapacity)->getLevel());
+			});
+
+			subArmy.copyUnits(_units, nbElement);
+		}
 		return subArmy;
 	}
 	catch (...)
@@ -339,18 +343,22 @@ Army Army::getNthNearestUnit(int nbElement, Point point)
 {
 	try
 	{
-		int nbUnit = _units.size();
-		if (nbElement >= nbUnit)
-			nbElement = nbUnit - 1;
-
-		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
-			[point](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (point.distance(a->getPosition()) < point.distance(b->getPosition()));
-		});
-
 		Army subArmy(0, 0);
-		subArmy.copyUnits(_units, nbElement);
 
+		int nbUnit = _units.size();
+		if (nbUnit > 0)
+		{
+			if (nbElement >= nbUnit)
+				nbElement = nbUnit - 1;
+
+			std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
+				[point](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
+				return (point.distance(a->getPosition()) < point.distance(b->getPosition()));
+			});
+
+			Army subArmy(0, 0);
+			subArmy.copyUnits(_units, nbElement);
+		}
 		return subArmy;
 	}
 	catch (...)
@@ -364,18 +372,22 @@ Army Army::getNthFurthestUnit(int nbElement, Point point)
 {
 	try
 	{
-		int nbUnit = _units.size();
-		if (nbElement >= nbUnit)
-			nbElement = nbUnit - 1;
-
-		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
-			[point](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (point.distance(a->getPosition()) > point.distance(b->getPosition()));
-		});
-
 		Army subArmy(0, 0);
-		subArmy.copyUnits(_units, nbElement);
 
+		int nbUnit = _units.size();
+		if (nbUnit > 0)
+		{
+			if (nbElement >= nbUnit)
+				nbElement = nbUnit - 1;
+
+			std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
+				[point](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
+				return (point.distance(a->getPosition()) > point.distance(b->getPosition()));
+			});
+
+			Army subArmy(0, 0);
+			subArmy.copyUnits(_units, nbElement);
+		}
 		return subArmy;
 	}
 	catch (...)
