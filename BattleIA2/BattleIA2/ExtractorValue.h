@@ -26,11 +26,11 @@ class ExtractorValue : public Extractor<float>
 class ExtractorCxUnitValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Unit> > _eUnit;
+		std::unique_ptr< Extractor<Unit&> > _eUnit;
 		int _indexCapacity;
 
 	public:
-		ExtractorCxUnitValue(std::unique_ptr< Extractor<Unit> >& eUnit, int indexCapacity)
+		ExtractorCxUnitValue(std::unique_ptr< Extractor<Unit&> >& eUnit, int indexCapacity)
 			:  _indexCapacity(indexCapacity)
 		{
 			_eUnit = std::move(eUnit);
@@ -46,11 +46,11 @@ class ExtractorCxUnitValue : public Extractor<float>
 class ExtractorDistanceUnitPointValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Unit> > _eUnit;
+		std::unique_ptr< Extractor<Unit&> > _eUnit;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorDistanceUnitPointValue(std::unique_ptr< Extractor<Unit> >& eUnit, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorDistanceUnitPointValue(std::unique_ptr< Extractor<Unit&> >& eUnit, std::unique_ptr< Extractor<Point> >& ePoint)
 		{
 			_eUnit = std::move(eUnit);
 			_ePoint = std::move(ePoint);

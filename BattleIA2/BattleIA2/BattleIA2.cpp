@@ -22,15 +22,14 @@
 int main(void)
 {
 	std::srand(static_cast<unsigned int>(time(NULL)));
-	/*
-	std::srand(static_cast<unsigned int>(time(NULL)));
+
 	std::shared_ptr<Army> champions;
 
 	int iteration = 100;
 	int threshold = 500;
 	int populationSize = 10;
 	int armySize = 5;
-	int unitLevel = 10;
+	int unitLevel = 5;
 
 	if ( (threshold >= ((populationSize - 1) * armySize)) || threshold <= 0 )
 		threshold = ((populationSize - 1) * armySize) / 2;
@@ -39,7 +38,6 @@ int main(void)
 
 	try
 	{
-		//std::ifstream in("Army_10_100.save");
 		std::ifstream in(fileName);
 		Army army = Army::load(in);
 		std::cout << army << std::endl;
@@ -51,38 +49,17 @@ int main(void)
 		champions = nullptr;
 	} 
 
-	float arenaSize = (populationSize + (unitLevel/2.f)) * 10.f;
-
+	float arenaSize = (populationSize) * 10.f;
 	Rectangle arena(Point(0.00f, arenaSize), arenaSize, arenaSize);
 
-	//std::unique_ptr<Army> army = train(100, 1000, 100, 10, 100, champions);
 	std::unique_ptr<Army> army = train(arena, iteration, threshold, populationSize, armySize, unitLevel, champions);
 	std::cout << *army << std::endl;
-	//std::ofstream out("Army_10_100.save");
+
 	std::ofstream out(fileName);
 	army->save(out);
 	out.flush();
 	out.close();
-	*/
 
-	
-	//Army a = Army(5, 10);
-	//Army o = Army(5, 10);
-	//Unit& u = *(a.getUnitsList()[0]);
-
-	Unit u = Unit(10, "?C1LDOPU<C4U!ALDOPU?aDOPU<a5O!EBO!N");
-	//std::unique_ptr<Action> action = u.getAction(a, o);
-	/*
-	std::unique_ptr<Extractor<float>>ex = std::unique_ptr<Extractor<float>>(new ExtractorValue(5));
-
-	std::cout << ex->get(*u, a, o) << std::endl;
-	*/
-
-	//std::string test = AiCodeGenerator::generateAiCode();
-	//std::stringstream code;
-	//code << test;
-	//DecisionNode dn = DecisionNode(code);
-	//std::unique_ptr<Action> action = dn.get(u, a, o);
 	std::cin.ignore();
 
 	return 0;

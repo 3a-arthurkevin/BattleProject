@@ -63,6 +63,8 @@ class Army
 			return _units.size();
 		}
 
+		int getIndexUnit(int idUnit);
+
 		//Return the unit with the given ID
 		Unit& getUnit(int id);
 		/*

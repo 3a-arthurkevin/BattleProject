@@ -14,7 +14,7 @@
 class ShotActionNode : public Node
 {	
 	private:
-		std::shared_ptr<Extractor<Unit>> _unitTargetExtractor;
+		std::shared_ptr<Extractor<Unit&>> _unitTargetExtractor;
 
 	public:
 		ShotActionNode(std::stringstream& aiCode);

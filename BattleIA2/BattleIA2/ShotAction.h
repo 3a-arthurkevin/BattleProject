@@ -13,30 +13,67 @@
 class ShotAction : public Action
 {
 	private:
-		Unit& _unit;
-		Unit& _opponent;
+		Unit* _unit;
+		Unit* _opponent;
 
 	public:
 		//Constructor with as first paramter the unit attacking, and as second, its target
 		ShotAction(Unit& unit, Unit& opponent)
-			: _unit(unit), _opponent(opponent) {}
+			: _unit(&unit), _opponent(&opponent) {}
 
 		//Run the action
 		//Log parameter indicate if we write something or not on the standard output
-		void execute(bool log = false)
+		void execute(Army& a, Army& o, const Rectangle& arena, bool log = false)
 		{
-			_opponent.takeDamage(_unit.getDamage().getValue());
+			// Test if _target is in range of _unit
+			// If _target not in range, unit go closer to _target
+				// Test if futur positionToMove is inside the arena
 
-			_unit.shoot();
-			if (log)
+			Point posUnit = _unit->getPosition();
+			Point posTarget = _opponent->getPosition();
+			float range = _unit->getRange().getValue();
+
+			float distanceBetweenUnits = posUnit.distance(posTarget);
+
+			//Test target in range
+			if (distanceBetweenUnits <= range)
 			{
-				std::cout << "Unit " << _unit.getId() << " shoot Unit " << _opponent.getId();
-				float hp = _opponent.getLife().getValue();
+				_opponent->takeDamage(_unit->getDamage().getValue());
 
-				if (hp > 0)
-					std::cout << " (" << hp << "hp remaining)" << std::endl;
+				_unit->shoot();
+				if (log)
+				{
+					std::cout << "Unit " << _unit->getId() << " shoot Unit " << _opponent->getId();
+					float hp = _opponent->getLife().getValue();
+
+					if (hp > 0)
+						std::cout << " (" << hp << "hp remaining)" << std::endl;
+					else
+						std::cout << " (dead !)" << std::endl;
+				}
+			}
+			//Move closer to target
+			else
+			{
+				Point posToMove;
+
+				float k = (_unit->getSpeed().getValue() / distanceBetweenUnits);
+				Point directionalVector(posTarget - posUnit);
+				Point futurLocation = Point(posUnit + (directionalVector * k));
+				
+				//check if not inside arena
+				if (!(arena.include(futurLocation)))
+					posToMove = futurLocation; //posUnit;
 				else
-					std::cout << " (dead !)" << std::endl;
+					posToMove = futurLocation;
+
+				_unit->moveToPosition(posToMove);
+
+				if (log)
+				{
+					std::cout << "Unit " << _unit->getId() << " move from " << _unit->getPosition();
+					std::cout << " to " << _unit->getPosition() << " in order to attack" << std::endl;
+				}
 			}
 		}
 };

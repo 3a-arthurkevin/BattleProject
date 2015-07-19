@@ -26,8 +26,8 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 	Army A = a;
 	Army B = b;
 	AI ai;
-	int turn = 1;
-	while (A.size()>0 && B.size()>0 && turn++ < /*10000*/50) 
+	int turn = 0;
+	while (A.size()>0 && B.size()>0 && ++turn <= /*10000*/50) 
 	{
 		if (log)
 		{
@@ -58,13 +58,16 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 				if (log)std::cout << "Unit#" << it->unitId << " (Army " << ((it->army) == &A ? "A" : "B") << ") : ";
 				Unit& unit = it->army->getUnit(it->unitId);
 				std::unique_ptr<Action> action = ai(unit, *(it->army), *(it->opponents), arena);
-				action->execute(log);
+				action->execute(*(it->army), *(it->opponents), arena, log);
 				it->opponents->purge();
+				std::cout << std::endl;
 			}
 			catch (std::invalid_argument e)
 			{
-
 				//can happens if the unit is already dead or if an army is empty
+				std::cout << std::endl;
+				std::cout << "Catch - Battle.cpp" << std::endl;
+				std::cout << std::endl;
 				continue;
 			}
 		}

@@ -28,13 +28,15 @@ std::unique_ptr<Operator> OperatorFactory::generateOperator(std::stringstream& a
 			//Default case (Error in the AiCode)
 			default:
 			{
-				return nullptr;
+				return std::unique_ptr<Operator>(new Smaller());
+				//return nullptr;
 			}
 		}
 	}
 	catch (...)
 	{
 		std::cout << "Fin ou Erreur chaine code IA" << std::endl;
-		return nullptr;
+		return std::unique_ptr<Operator>(new Greater());
+		//return nullptr;
 	}
 }

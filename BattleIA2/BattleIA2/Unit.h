@@ -53,6 +53,9 @@ class Unit
 		//Method in charge of the initialization of id, position(random), and capacities
 		void init();
 
+		//Methode creating the AI Tree
+		void generateAiTree();
+
 	public:
 		Unit(int globalLevel, std::string aiCode);
 
@@ -86,14 +89,7 @@ class Unit
 			return _iaCode;
 		}
 
-		//provide the Root Node of the unit's AI
-		
 		std::unique_ptr<Action> getAction(Army& a, Army& o);
-		/*
-		{
-			return *(_rootNode);
-		}
-		*/
 
 		//Provide the speed capacity of the unit
 		SpeedCapacity& getSpeed()

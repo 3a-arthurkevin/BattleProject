@@ -2,6 +2,7 @@
 
 #include "AiCodeGenerator.h"
 #include "NodeFactory.h"
+#include "EmptyAction.h"
 
 //static counter used for unique id creation
 int Unit::_idCount = 0;
@@ -25,15 +26,24 @@ void Unit::init()
 	this->_capacities.push_back(std::unique_ptr<Capacity>(new FirerateCapacity()));
 }
 
+void Unit::generateAiTree()
+{
+	//std::cout << "---------- Begin Tree : "<< _id << " ----------" << std::endl;
+
+	std::stringstream streamCode;
+	streamCode << _iaCode;
+	_rootNode = NodeFactory::generateNode(streamCode);
+
+	//std::cout << "---------- End Tree ----------" << std::endl;
+	//std::cout << std::endl;
+}
+
 Unit::Unit(int globalLevel, std::string aiCode)
 {
 	init();
 
 	_iaCode = aiCode;
-
-	std::stringstream streamCode;
-	streamCode << _iaCode;
-	_rootNode = NodeFactory::generateNode(streamCode);
+	generateAiTree();
 
 	while (globalLevel--)
 		this->_capacities[std::rand() % this->_capacities.size()]->upgrade();
@@ -56,9 +66,7 @@ Unit::Unit(int globalLevel)
 	*/
 	_iaCode = AiCodeGenerator::generateAiCode();
 
-	std::stringstream streamCode;
-	streamCode << _iaCode;
-	_rootNode = NodeFactory::generateNode(streamCode);
+	generateAiTree();
 
 	while (globalLevel--)
 		this->_capacities[std::rand() % this->_capacities.size()]->upgrade();
@@ -71,10 +79,7 @@ Unit::Unit(std::string iaCode, int speedLevel, int lifeLevel, int armorLevel, in
 	init();
 
 	_iaCode = iaCode;
-
-	std::stringstream streamCode;
-	streamCode << _iaCode;
-	_rootNode = NodeFactory::generateNode(streamCode);
+	generateAiTree();
 	
 	getSpeed().upgrade(speedLevel);
 	getLife().upgrade(lifeLevel);
@@ -92,10 +97,7 @@ Unit::Unit(std::string iaCode, std::vector<int>& levels)
 	init();
 	
 	_iaCode = iaCode;
-
-	std::stringstream streamCode;
-	streamCode << _iaCode;
-	_rootNode = NodeFactory::generateNode(streamCode);
+	generateAiTree();
 	
 	for (unsigned int i = 0; i < levels.size() && i < _capacities.size(); ++i)
 		_capacities[i]->upgrade(levels[i]);
@@ -106,7 +108,12 @@ Unit::Unit(std::string iaCode, std::vector<int>& levels)
 Unit::Unit(const Unit& unit)
 {
 	init();
+
+	this->_id = unit._id;
+
 	this->_iaCode = unit._iaCode;
+	generateAiTree();
+
 	for (unsigned int i = 0; i < _capacities.size(); ++i)
 		_capacities[i]->upgrade(unit._capacities[i]->getLevel());
 
@@ -119,8 +126,11 @@ void Unit::swap(Unit& unit)
 {
 	std::swap(_capacities, unit._capacities);
 	std::swap(_iaCode, unit._iaCode);
+	std::swap(_rootNode, unit._rootNode);
 	std::swap(_position, unit._position);
 	std::swap(_id, unit._id);
+
+	generateAiTree();
 }
 
 
@@ -268,6 +278,12 @@ Unit Unit::load(std::istream& in)
 
 std::unique_ptr<Action> Unit::getAction(Army& a, Army& o)
 {
-	return _rootNode->get(*this, a, o);
+	if (_rootNode)
+		return _rootNode->get(*this, a, o);
+	else
+	{
+		std::cout << "Error - Root Node Empty" << std::endl;
+		return std::unique_ptr<Action>(new EmptyAction(*this));
+	}
 }
 

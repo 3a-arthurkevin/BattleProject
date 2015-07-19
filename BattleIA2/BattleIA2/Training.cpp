@@ -18,8 +18,8 @@ struct ArmyWrapper
 //Return a position according to the arena's size in order to set all units position before the war
 Point getRandomPosition(const Rectangle& arena)
 {
-	float x = static_cast<float>(rand() % (static_cast<int>(arena.getWidth() + arena.getTopleft().getX())));
-	float y = static_cast<float>(rand() % (static_cast<int>(arena.getHeight() + arena.getTopleft().getY())));
+	float x = static_cast<float>(rand() % (static_cast<int>(arena.getWidth() /*+ arena.getTopleft().getX()*/)));
+	float y = static_cast<float>(rand() % (static_cast<int>(arena.getHeight() /*+ arena.getTopleft().getY()*/)));
 
 	return Point(x, y);
 }

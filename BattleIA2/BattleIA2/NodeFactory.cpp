@@ -21,7 +21,7 @@ std::unique_ptr<Node> NodeFactory::generateNode(std::stringstream& aiCode)
 			//Case ActionNode
 			case '!':
 			{
-				aiCode << c;
+				aiCode >> c;
 
 				switch (c)
 				{
@@ -51,13 +51,14 @@ std::unique_ptr<Node> NodeFactory::generateNode(std::stringstream& aiCode)
 			//Default case (Error in the AiCode)
 			default:
 			{
+				std::cout << "Fin ou Erreur - 1 - chaine code IA" << std::endl;
 				return std::unique_ptr<Node>(new EmptyActionNode());
 			}
 		}
 	}
 	catch (...)
 	{
-		std::cout << "Fin ou Erreur chaine code IA" << std::endl;
+		std::cout << "Fin ou Erreur 2 - chaine code IA" << std::endl;
 		return std::unique_ptr<Node>(new EmptyActionNode());
 	}
 }

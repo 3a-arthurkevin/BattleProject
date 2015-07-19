@@ -53,7 +53,8 @@ std::string AiCodeGenerator::generateDecisionNodeCode(int& endCondition)
 	// 20% of DecisionNode
 	while (endCondition < 2)
 	{
-		randomValue = rand() % 10 + 1;
+		//randomValue = rand() % 10 + 1;
+		randomValue = rand() % 8 + 1;
 
 		if (randomValue >= 1 && randomValue <= 8)
 		{
@@ -76,13 +77,13 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 	std::string extractorValueCode;
 	extractorValueCode.clear();
 
-	int randomValue = rand() % 5 + 1;
+	//int randomValue = rand() % 5 + 1;
+	int randomValue = rand() % 2 + 1;
 
 	//Case [val]
 	if(randomValue == 1)
 	{
-		std::string strValue = ('[' + std::to_string(static_cast<float>(rand() % 11)) + ']');
-		extractorValueCode += strValue;
+		extractorValueCode += ('[' + std::to_string(static_cast<float>(rand() % 101)) + ']');
 	}
 	//Case C0-C6<Unit>
 	else if (randomValue == 2)
@@ -90,6 +91,7 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 		std::string indexCapacity = std::to_string(rand() % 7);
 		extractorValueCode += ('C' + indexCapacity + generateExtractorUnitCode());
 	}
+	/*
 	//Case D<Unit><Point>
 	else if (randomValue == 3)
 	{
@@ -132,7 +134,7 @@ std::string AiCodeGenerator::generateExtractorValueCode()
 			extractorValueCode += ("aD" + generateExtractorArmyCode() + generateExtractorPointCode());
 		}
 	}
-
+	*/
 	return extractorValueCode;
 }
 
@@ -142,7 +144,8 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 	std::string extractorUnitCode;
 	extractorUnitCode.clear();
 
-	int randomValue = rand() % 3 + 1;
+	//int randomValue = rand() % 3 + 1;
+	int randomValue = rand() % 2 + 1;
 
 	//Case U
 	if (randomValue == 1)
@@ -164,6 +167,7 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 			extractorUnitCode += ('H' + indexCapacity + generateExtractorArmyCode());
 		}
 	}
+	/*
 	//Case LD<Set><Point> | HD<Set><Point>
 	else
 	{
@@ -178,7 +182,7 @@ std::string AiCodeGenerator::generateExtractorUnitCode()
 			extractorUnitCode += ("HD" + generateExtractorArmyCode() + generateExtractorPointCode());
 		}
 	}
-
+	*/
 	return extractorUnitCode;
 }
 
@@ -210,7 +214,8 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 	std::string extractorArmyCode;
 	extractorArmyCode.clear();
 
-	int randomValue = rand() % 4 + 1;
+	//int randomValue = rand() % 4 + 1;
+	int randomValue = rand() % 2 + 1;
 
 	//Case A
 	if (randomValue == 1)
@@ -222,12 +227,13 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 	{
 		extractorArmyCode += 'O';
 	}
+	/*
 	//Case TL0-6[val]<Set> | TH0-6[val]<Set>
 	else if (randomValue == 3)
 	{
 		int random = rand() % 2 + 1;
 		std::string indexCapacity = std::to_string(rand() % 7);
-		std::string strValue = ('[' + std::to_string(static_cast<float>(rand() % 11)) + ']');
+		std::string strValue = ('[' + std::to_string(static_cast<float>(rand() % 101)) + ']');
 
 		if (random == 1)
 		{
@@ -238,13 +244,14 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 			extractorArmyCode += ("TH" + indexCapacity +  strValue +  generateExtractorArmyCode());
 		}
 	}
+	
 	//Case NL0-6<Set> | NH0-6<Set>
 	//Case NLD<Point><Set> |  NLD<Point><Set>
 	else
 	{
-		randomValue = rand() % 2 + 1;
+		float secondRandomValue = rand() % 2 + 1;
 		//Case NL0-6<Set> | NH0-6<Set>
-		if (randomValue == 1)
+		if (secondRandomValue == 1)
 		{
 			int random = rand() % 2 + 1;
 			std::string nbElement = std::to_string(rand() % 9 + 1);
@@ -259,6 +266,7 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 				extractorArmyCode += (nbElement + 'H' + indexCapacity + generateExtractorArmyCode());
 			}
 		}
+		
 		//Case NLD<Point><Set> |  NLD<Point><Set>
 		else
 		{
@@ -274,8 +282,9 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 				extractorArmyCode += (nbElement + "HD" + generateExtractorPointCode() + generateExtractorArmyCode());
 			}
 		}
+		
 	}
-
+	*/
 	return extractorArmyCode;
 }
 

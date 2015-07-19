@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "Unit.h"
+#include "Army.h"
 #include "Point.h"
 #include "Action.h"
 
@@ -13,25 +14,39 @@
 class EscapeAction : public Action
 {
 private:
-	Unit& _unit;
+	Unit* _unit;
 	Point _positionToAvoid;
 
 public:
 	//Constructor taking in paramters the unit to move and the destination
-	EscapeAction(Unit& unit, const Point& position)
-		: _unit(unit), _positionToAvoid(position) {}
+	EscapeAction(Unit& unit, const Point positionToAvoid)
+		: _unit(&unit), _positionToAvoid(positionToAvoid) {}
 
 	//Run the action
 	//Log parameter indicate if we write something or not on the standard output
-	void execute(bool log = false)
+	void execute(Army& a, Army& o, const Rectangle& arena, bool log = false)
 	{
-		if (log)
-			std::cout << "Unit " << _unit.getId() << " escape from " << _unit.getPosition();
+		// Test if futur positionToMove is inside the arena
 
-		_unit.escapeFromPosition(_positionToAvoid);
+		Point futurUnitPosition = _unit->getPosition();
+		futurUnitPosition.escapeFrom(_positionToAvoid, _unit->getSpeed().getValue());
 
-		if (log)
-			std::cout << " to " << _unit.getPosition() << std::endl;
+		if (!(arena.include(futurUnitPosition)))
+		{
+			if (log)
+				std::cout << "Unit " << _unit->getId() << " can't escape from " << _unit->getPosition() << std::endl;
+		}
+		else
+		{
+			if (log)
+				std::cout << "Unit " << _unit->getId() << " escape from " << _unit->getPosition();
+
+			_unit->escapeFromPosition(_positionToAvoid);
+
+			if (log)
+				std::cout << " to " << _unit->getPosition() << std::endl;
+		}
+
 	}
 };
 

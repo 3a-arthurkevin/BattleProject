@@ -9,10 +9,10 @@
 //#include "ExtractorArmy.h"
 //#include "ExtractorPoint.h"
 
-class ExtractorUnit : public Extractor<Unit>
+class ExtractorUnit : public Extractor<Unit&>
 {
 	public:
-		Unit get(Unit& u, Army& a, Army& o)
+		Unit& get(Unit& u, Army& a, Army& o)
 		{
 			return u;
 		}
@@ -20,7 +20,7 @@ class ExtractorUnit : public Extractor<Unit>
 
 //unité qui a la valeur min / max de capacité au sein d’un ensemble (L0L6 ou H0H6) <set>
 
-class ExtractorMaxCxArmyUnit : public Extractor<Unit>
+class ExtractorMaxCxArmyUnit : public Extractor<Unit&>
 {
 	private:
 		std::unique_ptr< Extractor<Army> > _eArmy;
@@ -33,13 +33,13 @@ class ExtractorMaxCxArmyUnit : public Extractor<Unit>
 			_eArmy = std::move(eArmy);
 		};
 
-		Unit get(Unit& u, Army& a, Army& o)
+		Unit& get(Unit& u, Army& a, Army& o)
 		{
 			return (_eArmy->get(u, a, o).getHighestUnit(_indexCapacity));
 		}
 };
 
-class ExtractorMinCxArmyUnit : public Extractor<Unit>
+class ExtractorMinCxArmyUnit : public Extractor<Unit&>
 {
 	private:
 		std::unique_ptr< Extractor<Army> > _eArmy;
@@ -52,14 +52,14 @@ class ExtractorMinCxArmyUnit : public Extractor<Unit>
 			_eArmy = std::move(eArmy);
 		};
 
-		Unit get(Unit& u, Army& a, Army& o)
+		Unit& get(Unit& u, Army& a, Army& o)
 		{
 			return (_eArmy->get(u, a, o).getLowestUnit(_indexCapacity));
 		}
 };
 
 //unité la plus proche / loin d’un point au sein d’un ensemble (LD ou HD) <set> <point>
-class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit>
+class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit&>
 {
 	private:
 		std::unique_ptr< Extractor<Army> > _eArmy;
@@ -72,7 +72,7 @@ class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit>
 			_ePoint = std::move(ePoint);
 		}
 
-		Unit get(Unit& u, Army& a, Army& o)
+		Unit& get(Unit& u, Army& a, Army& o)
 		{
 			Point p = _ePoint->get(u, a, o);
 
@@ -80,7 +80,7 @@ class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit>
 		}
 };
 
-class ExtractorMinDistancePointArmyUnit : public Extractor<Unit>
+class ExtractorMinDistancePointArmyUnit : public Extractor<Unit&>
 {
 	private:
 		std::unique_ptr< Extractor<Army> > _eArmy;
@@ -93,7 +93,7 @@ class ExtractorMinDistancePointArmyUnit : public Extractor<Unit>
 			_ePoint = std::move(ePoint);
 		};
 
-		Unit get(Unit& u, Army& a, Army& o)
+		Unit& get(Unit& u, Army& a, Army& o)
 		{
 			Point p = _ePoint->get(u, a, o);
 

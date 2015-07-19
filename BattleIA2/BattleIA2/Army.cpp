@@ -11,7 +11,7 @@ void Army::copyUnits(const std::vector<std::shared_ptr<Unit> >& units, int nbEle
 {
 	_units.clear();
 	for (auto it = units.begin(); it != units.begin() + nbElement; ++it)
-		_units.push_back(*it);
+		_units.push_back(std::shared_ptr<Unit>(new Unit(*(it->get()))));
 }
 
 Army::Army(int size, int level)
@@ -38,12 +38,7 @@ void Army::swap(Army& army)
 
 Army& Army::operator=(Army army)
 {
-	//swap(army);
-	//*this = army;
-
-	//_units = army._units;
-
-	copyUnits(army._units);
+	swap(army);
 
 	return *this;
 }
@@ -64,15 +59,15 @@ Unit& Army::getNearestUnit(const Point& p)
 	if (_units.empty())
 		throw std::invalid_argument("empty army");
 	
-	Unit* result;
-	float minDist = std::numeric_limits<float>::max();
-	for (auto it = _units.begin(); it != _units.end(); ++it)
+	std::shared_ptr<Unit> result = std::shared_ptr<Unit>(_units[0]);
+	float minDist = result->getPosition().distance(p);
+	for (auto it = _units.begin()+1; it != _units.end(); ++it)
 	{
 		float d = (*it)->getPosition().distance(p);
 		if (d < minDist)
 		{
 			minDist = d;
-			result = it->get();
+			result = *it;
 		}
 	}
 	return (*result);
@@ -83,15 +78,15 @@ Unit& Army::getFurthestUnit(const Point& p)
 	if (_units.empty())
 		throw std::invalid_argument("empty army");
 	
-	Unit* result;
-	float maxDist = 0.0f;
-	for (auto it = _units.begin(); it != _units.end(); ++it)
+	std::shared_ptr<Unit> result = std::shared_ptr<Unit>(_units[0]);
+	float maxDist = result->getPosition().distance(p);
+	for (auto it = _units.begin()+1; it != _units.end(); ++it)
 	{
 		float d = (*it)->getPosition().distance(p);
 		if (d > maxDist)
 		{
 			maxDist = d;
-			result = it->get();
+			result = *it;
 		}
 	}
 	return (*result);
@@ -250,7 +245,7 @@ float Army::getAverageDistance(Point point)
 	try
 	{
 		if (_units.empty())
-			throw std::invalid_argument("empty army");
+			throw std::invalid_argument("Empty army - Get Average Distance");
 
 		float sum = std::accumulate(_units.begin(), _units.end(), 0.0f,
 			[point](float& a, const std::shared_ptr<Unit>& b) {
@@ -271,7 +266,7 @@ Point Army::getCentroid()
 	try
 	{
 		if (_units.empty())
-			throw std::invalid_argument("empty army");
+			throw std::invalid_argument("Empty army - Get Centroid");
 
 		Point pointSum = std::accumulate(_units.begin(), _units.end(), Point(),
 			[](Point& a, std::shared_ptr<Unit>& b){
@@ -323,9 +318,10 @@ Army Army::getNthHighestUnit(int nbElement, int indexCapacity)
 
 		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
 			[indexCapacity](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (a->getCapacity(indexCapacity)->getLevel() >= b->getCapacity(indexCapacity)->getLevel());
+			return (a->getCapacity(indexCapacity)->getLevel() > b->getCapacity(indexCapacity)->getLevel());
 		});
 
+		
 		Army subArmy(0, 0);
 		subArmy.copyUnits(_units, nbElement);
 
@@ -374,7 +370,7 @@ Army Army::getNthFurthestUnit(int nbElement, Point point)
 
 		std::nth_element(_units.begin(), _units.begin() + nbElement, _units.end(),
 			[point](std::shared_ptr<Unit>& a, std::shared_ptr<Unit>& b){
-			return (point.distance(a->getPosition()) >= point.distance(b->getPosition()));
+			return (point.distance(a->getPosition()) > point.distance(b->getPosition()));
 		});
 
 		Army subArmy(0, 0);
@@ -393,7 +389,7 @@ Army Army::getNthFurthestUnit(int nbElement, Point point)
 Army Army::getSubArmyCapacityGreater(int indexCapacity, float threshold)
 {
 	if (_units.empty())
-		std::cout << "Army Emplty - Army.cpp - getSubArmyCapacityGreater" << std::endl;
+		std::cout << "Army Empty - Army.cpp - getSubArmyCapacityGreater" << std::endl;
 
 	Army subArmy(0, 0);
 	for (auto it = _units.begin(); it != _units.end(); ++it)
@@ -407,7 +403,7 @@ Army Army::getSubArmyCapacityGreater(int indexCapacity, float threshold)
 Army Army::getSubArmyCapacitySmaller(int indexCapacity, float threshold)
 {
 	if (_units.empty())
-		std::cout << "Army Emplty - Army.cpp - getSubArmyCapacitySmaller" << std::endl;
+		std::cout << "Army Empty - Army.cpp - getSubArmyCapacitySmaller" << std::endl;
 
 	Army subArmy(0, 0);
 	for (auto it = _units.begin(); it != _units.end(); ++it)
@@ -416,4 +412,19 @@ Army Army::getSubArmyCapacitySmaller(int indexCapacity, float threshold)
 			subArmy._units.push_back(*it);
 	}
 	return subArmy;
+}
+
+int Army::getIndexUnit(int idUnit)
+{
+	int index = -1;
+
+	for (unsigned i = 0; i < _units.size(); ++i)
+	{
+		if (_units[i]->getId() == idUnit)
+		{
+			index = i;
+			break;
+		}
+	}
+	return index;
 }

@@ -7,6 +7,10 @@ std::unique_ptr<Action> AI::operator()(Unit& unit, Army& allies, Army& opponents
 {
 	try
 	{
+		return unit.getAction(allies, opponents);
+
+
+		/*
 		//Check if unit can shoot --> getting the target
 		if (unit.getFirerate().canShoot())
 		{
@@ -46,38 +50,16 @@ std::unique_ptr<Action> AI::operator()(Unit& unit, Army& allies, Army& opponents
 		//Case when unit can't shoot --> getting closer to the neasest enemy
 		else
 		{
-			/*
-			Unit nearestEnemy = armyB.GetNearestUnit(unit.GetPosition());
-			actionToDo.SetAction(ActionType::Move);
-
-			actionToDo.SetId(nearestEnemy.GetId());
-
-			float distanceBetweenUnits = unit.GetPosition().Distance(nearestEnemy.GetPosition());
-
-			if (distanceBetweenUnits > 1.f || distanceBetweenUnits < -1.f)
-			{
-				float k = (unit.GetSpeed().GetValue() / distanceBetweenUnits);
-				Point pUnit(unit.GetPosition());
-				Point pEnemy(nearestEnemy.GetPosition());
-
-				Point directionalVector(pEnemy - pUnit);
-
-				Point futurLocation = Point(unit.GetPosition() + (directionalVector * k));
-
-				if (arena.include(futurLocation))
-					actionToDo.SetLocation(futurLocation);
-				else
-					actionToDo.SetAction(ActionType::None);
-				*/
 			Unit& target = opponents.getNearestUnit(unit.getPosition());
 			Point p = (2 * unit.getPosition()) - target.getPosition();
 			return std::unique_ptr<Action>(new MoveAction(unit, 1000 * p));
 		}
+		*/
 	}
 	catch (/*std::invalid_argument& e*/ ...)
 	{
 		//std::cout<<e.what()<<std::endl;
+		std::cout << "Error - IA - Get Action Unit" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(unit));
 	}
 }
-
