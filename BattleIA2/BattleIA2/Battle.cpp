@@ -94,7 +94,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 			const Unit *unit = punit.get();
 			
 			SDL_Rect src = { 0, 0, unit_image->w, unit_image->h };
-			SDL_Rect dst = { unit->getPosition().getX(), unit->getPosition().getY(), 8, 8 };
+			SDL_Rect dst = { 400 + unit->getPosition().getX(), 200 + unit->getPosition().getY(), 8, 8 };
 
 			SDL_BlitSurface(unit_image, &src, window, &dst);
 		}
@@ -104,7 +104,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 			const Unit *unit = punit.get();
 
 			SDL_Rect src = { 0, 0, unit_image2->w, unit_image2->h };
-			SDL_Rect dst = { unit->getPosition().getX(), unit->getPosition().getY(), 8, 8 };
+			SDL_Rect dst = { 400 + unit->getPosition().getX(), 200 + unit->getPosition().getY(), 8, 8 };
 
 			SDL_BlitSurface(unit_image2, &src, window, &dst);
 		}
