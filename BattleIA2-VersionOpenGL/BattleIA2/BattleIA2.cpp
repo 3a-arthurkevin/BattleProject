@@ -10,14 +10,6 @@
 #include "Training.h"
 #include "Rectangle.h"
 
-#include "Extractor.h"
-#include "ExtractorValue.h"
-#include "ExtractorUnit.h"
-#include "ExtractorPoint.h"
-#include "ExtractorArmy.h"
-
-#include "AiCodeGenerator.h"
-#include "DecisionNode.h"
 
 int main(void)
 {

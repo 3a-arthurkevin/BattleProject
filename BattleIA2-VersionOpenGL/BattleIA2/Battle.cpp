@@ -3,11 +3,6 @@
 #include "AI.h"
 #include "Action.h"
 
-#include "SDL.h"
-#include "SDL_image.h"
-
-#undef main
-
 //Struct used to manipulate a unit together with its army and its opponents
 struct UnitChoice
 {
@@ -30,13 +25,6 @@ Point getRandomPosition(const Rectangle& arena)
 //Run a fight between the two given armies, and store their score in the given variable.
 void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, int& scoreB, bool log)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Surface *window = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-	SDL_WM_SetCaption("ESGI | BattleIA2", 0);
-	SDL_Event event;
-	SDL_Surface *unit_image = IMG_Load("Assets/images/unit.png");
-	SDL_Surface *unit_image2 = IMG_Load("Assets/images/unit2.png");
-
 	if (log)
 	{
 		std::cout << "-------------------------------" << std::endl;
@@ -60,11 +48,6 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 	int turn = 0;
 	while (A.size()>0 && B.size()>0 && ++turn <= /*10000*/100) 
 	{
-		SDL_FillRect(window, &window->clip_rect, SDL_MapRGB(window->format, 0, 0, 0));
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) { exit(0); }
-		if (event.key.keysym.sym == SDLK_ESCAPE) { exit(0); }
-
 		if (log)
 		{
 			std::cout << "-------------------------------" << std::endl;
@@ -94,7 +77,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 				if (log)std::cout << "Unit#" << it->unitId << " (Army " << ((it->army) == &A ? "A" : "B") << ") : ";
 				Unit& unit = it->army->getUnit(it->unitId);
 				std::unique_ptr<Action> action = ai(unit, *(it->army), *(it->opponents), arena);
-				action->execute(*(it->army), *(it->opponents), arena, log);
+				action->execute(log);
 				it->opponents->purge();
 				std::cout << std::endl;
 			}
@@ -108,33 +91,7 @@ void fight(const Rectangle& arena, const Army& a, const Army& b, int& scoreA, in
 			}
 		}
 
-		for (auto punit : A.getUnitsList())
-		{
-			const Unit *unit = punit.get();
-			
-			SDL_Rect src = { 0, 0, unit_image->w, unit_image->h };
-			SDL_Rect dst = { unit->getPosition().getX(), unit->getPosition().getY(), 8, 8 };
-
-			SDL_BlitSurface(unit_image, &src, window, &dst);
-		}
-
-		for (auto punit : B.getUnitsList())
-		{
-			const Unit *unit = punit.get();
-
-			SDL_Rect src = { 0, 0, unit_image2->w, unit_image2->h };
-			SDL_Rect dst = { 400 + unit->getPosition().getX(), 200 + unit->getPosition().getY(), 8, 8 };
-
-			SDL_BlitSurface(unit_image2, &src, window, &dst);
-		}
-
-		SDL_Flip(window);
 	}
-
-	SDL_FreeSurface(unit_image);
-	SDL_FreeSurface(unit_image2);
-	SDL_FreeSurface(window);
-	SDL_Quit();
 
 	if (log)
 	{
