@@ -83,7 +83,6 @@ class Army
 		//Get the unit with the lowest level for the given capacity
 		Unit& getLowestUnit(int capa_index);
 
-
 		//Get the unit with the highest level for the given capacity
 		Unit& getHighestUnit(int capa_index);
 

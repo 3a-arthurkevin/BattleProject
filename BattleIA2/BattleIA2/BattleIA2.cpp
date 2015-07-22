@@ -26,7 +26,7 @@ int main(void)
 
 	std::shared_ptr<Army> champions;
 
-	int iteration = 100;
+	int iteration = 50;
 	int threshold = 20;
 	int populationSize = 10;
 	int armySize = 5;
