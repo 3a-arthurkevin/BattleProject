@@ -5,6 +5,7 @@
 
 #include "Army.h"
 #include "Unit.h"
+#include "SetUnit.h"
 
 template <typename RETURN_TYPE>
 class Extractor

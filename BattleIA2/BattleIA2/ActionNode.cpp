@@ -20,7 +20,7 @@ std::unique_ptr<Action> ShotActionNode::get(Unit& u, Army& a, Army& o)
 	}
 	catch (...)
 	{
-		std::cout << "Error - Shoot Action Node - Get" << std::endl;
+		//std::cout << "Error - Shoot Action Node - Get" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(u));
 	}
 }
@@ -41,7 +41,7 @@ std::unique_ptr<Action> MoveActionNode::get(Unit& u, Army& a, Army& o)
 	}
 	catch (...)
 	{
-		std::cout << "Error - Move Action Node - Get" << std::endl;
+		//std::cout << "Error - Move Action Node - Get" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(u));
 	}
 }
@@ -62,7 +62,7 @@ std::unique_ptr<Action> EscapeActionNode::get(Unit& u, Army& a, Army& o)
 	}
 	catch (...)
 	{
-		std::cout << "Error - Escape Action Node - Get" << std::endl;
+		//std::cout << "Error - Escape Action Node - Get" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(u));
 	}
 }

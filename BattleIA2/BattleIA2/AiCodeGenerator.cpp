@@ -21,7 +21,7 @@ std::string AiCodeGenerator::generateActionNodeCode()
 
 	pieceOfAiCode += '!';
 
-	int randomValue = rand() % 2 + 1;
+	int randomValue = rand() % 4 + 1;
 
 	//Case ShotAction
 	if (randomValue == 1)
@@ -29,6 +29,9 @@ std::string AiCodeGenerator::generateActionNodeCode()
 	//Case EscapeAction
 	else if (randomValue == 2)
 		pieceOfAiCode += ('E' + generateExtractorPointCode());
+	//Case EscapeAction
+	else if (randomValue == 3)
+		pieceOfAiCode += ('M' + generateExtractorPointCode());
 	//Case EmptyAction
 	else
 		pieceOfAiCode += 'N';
@@ -244,7 +247,7 @@ std::string AiCodeGenerator::generateExtractorArmyCode()
 	//Case NLD<Point><Set> |  NLD<Point><Set>
 	else
 	{
-		float secondRandomValue = rand() % 2 + 1;
+		int secondRandomValue = rand() % 2 + 1;
 		//Case NL0-6<Set> | NH0-6<Set>
 		if (secondRandomValue == 1)
 		{

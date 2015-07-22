@@ -27,7 +27,7 @@ std::unique_ptr<Action> DecisionNode::get(Unit& u, Army& a, Army& o)
 	}
 	catch (...)
 	{
-		std::cout << "Error - Decision Node - Get" << std::endl;
+		//std::cout << "Error - Decision Node - Get" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(u));
 	}
 }

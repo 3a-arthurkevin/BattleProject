@@ -95,6 +95,7 @@
     <ClCompile Include="BattleIA2.cpp" />
     <ClCompile Include="ExtractorFactory.cpp" />
     <ClCompile Include="OperatorFactory.cpp" />
+    <ClCompile Include="SetUnit.cpp" />
     <ClCompile Include="Training.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
@@ -129,6 +130,7 @@
     <ClInclude Include="RangeCapacity.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RegenCapacity.h" />
+    <ClInclude Include="SetUnit.h" />
     <ClInclude Include="ShotAction.h" />
     <ClInclude Include="Smaller.h" />
     <ClInclude Include="SpeedCapacity.h" />

@@ -19,16 +19,17 @@
 #include "AiCodeGenerator.h"
 #include "DecisionNode.h"
 
+
 int main(void)
 {
 	std::srand(static_cast<unsigned int>(time(NULL)));
 
 	std::shared_ptr<Army> champions;
 
-	int iteration = 10;
+	int iteration = 100;
 	int threshold = 20;
-	int populationSize = 3;
-	int armySize = 10;
+	int populationSize = 10;
+	int armySize = 5;
 	int unitLevel = 10;
 
 	if ( (threshold >= ((populationSize - 1) * armySize)) || threshold <= 0 )
@@ -49,7 +50,7 @@ int main(void)
 		champions = nullptr;
 	} 
 
-	float arenaSize = (populationSize) * 100.f;
+	float arenaSize = (populationSize) * 50.f;
 	Rectangle arena(Point(0.00f, arenaSize), arenaSize, arenaSize);
 
 	std::unique_ptr<Army> army = train(arena, iteration, threshold, populationSize, armySize, unitLevel, champions);

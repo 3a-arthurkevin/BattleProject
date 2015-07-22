@@ -23,11 +23,11 @@ class ExtractorUnit : public Extractor<Unit&>
 class ExtractorMaxCxArmyUnit : public Extractor<Unit&>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMaxCxArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity)
+		ExtractorMaxCxArmyUnit(std::unique_ptr< Extractor<SetUnit> >& eArmy, int indexCapacity)
 			: _indexCapacity(indexCapacity)
 		{
 			_eArmy = std::move(eArmy);
@@ -42,11 +42,11 @@ class ExtractorMaxCxArmyUnit : public Extractor<Unit&>
 class ExtractorMinCxArmyUnit : public Extractor<Unit&>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMinCxArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity)
+		ExtractorMinCxArmyUnit(std::unique_ptr< Extractor<SetUnit> >& eArmy, int indexCapacity)
 			:  _indexCapacity(indexCapacity)
 		{
 			_eArmy = std::move(eArmy);
@@ -62,11 +62,11 @@ class ExtractorMinCxArmyUnit : public Extractor<Unit&>
 class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit&>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMaxDistancePointArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorMaxDistancePointArmyUnit(std::unique_ptr< Extractor<SetUnit> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
 		{
 			_eArmy = std::move(eArmy); 
 			_ePoint = std::move(ePoint);
@@ -83,11 +83,11 @@ class ExtractorMaxDistancePointArmyUnit : public Extractor<Unit&>
 class ExtractorMinDistancePointArmyUnit : public Extractor<Unit&>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMinDistancePointArmyUnit(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorMinDistancePointArmyUnit(std::unique_ptr< Extractor<SetUnit> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
 		{
 			_eArmy = std::move(eArmy);
 			_ePoint = std::move(ePoint);

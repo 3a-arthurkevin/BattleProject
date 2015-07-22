@@ -108,6 +108,9 @@
     <ClCompile Include="DecisionNode.cpp">
       <Filter>Fichiers sources\ActionNode</Filter>
     </ClCompile>
+    <ClCompile Include="SetUnit.cpp">
+      <Filter>Fichiers sources\Battle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SpeedCapacity.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="NodeFactory.h">
       <Filter>Fichiers d%27en-tête\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUnit.h">
+      <Filter>Fichiers d%27en-tête\Battle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

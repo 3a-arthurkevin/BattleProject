@@ -5,9 +5,6 @@
 
 #include "Extractor.h"
 
-//#include "ExtractorUnit.h"
-//#include "ExtractorArmy.h"
-//#include "ExtractorPoint.h"
 
 class ExtractorPointUnitPoint : public Extractor<Point>
 {
@@ -29,10 +26,10 @@ class ExtractorPointUnitPoint : public Extractor<Point>
 class ExtractorCentroidArmyPoint : public Extractor<Point>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 
 	public:
-		ExtractorCentroidArmyPoint(std::unique_ptr< Extractor<Army> >& eArmy)
+		ExtractorCentroidArmyPoint(std::unique_ptr< Extractor<SetUnit> >& eArmy)
 		{
 			_eArmy = std::move(eArmy);
 		};

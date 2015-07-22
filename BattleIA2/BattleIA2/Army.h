@@ -28,21 +28,6 @@ class Army
 		//Method for deep copying the units vector
 		void copyUnits(const std::vector<std::shared_ptr<Unit> >& units);
 
-		/*
-			New private functions for Battle Round 2
-		*/
-		//sub part of the units vector filled with shared pointer Unit
-		Army();
-
-		Army copyUnits(const std::vector<std::shared_ptr<Unit> >& units, int nbElement);
-
-		//Return a new army with unit pointer
-		Army copyUnits();
-
-		//Return a new army with unit pointer
-		Army copySubArmy(std::vector<std::shared_ptr<Unit>> units);
-
-
 	public:
 		//Constructor with parameters the number of units, and the level of each
 		Army(int size, int level);
@@ -116,36 +101,7 @@ class Army
 		void save(std::ostream& out)const;
 
 		//Load an army from the input stream
-		static Army load(std::istream& in);
-
-
-		/*
-			New public functions for Battle Round 2
-		*/
-
-		//Return the average value of a capacity from the Units in the Army
-		float getAverageCapacityValue(int indexCapacity);
-		//Return the average value of the distance between a Point and all Units Position in the Army
-		float getAverageDistance(Point point);
-
-		//Return centroid of units position
-		Point getCentroid();
-		
-		//Return an Army of N Units with the highest value of a capacity
-		Army getNthHighestUnit(int nbElement, int indexCapacity);
-		//Return an Army of N Units with the lowest value of a capacity
-		Army getNthLowestUnit(int nbElement, int indexCapacity);
-		
-		//Return an Army of N Units the furthest from a Point
-		Army getNthFurthestUnit(int nbElement, Point point);
-		//Return an Army of N Units the nearest from a Point
-		Army getNthNearestUnit(int nbElement, Point point);
-		
-		//Return an Army of Units who have a capacity greater than a threshold
-		Army getSubArmyCapacityGreater(int indexCapacity, float threshold);
-		//Return an Army of Units who have a capacity smaller than a threshold
-		Army getSubArmyCapacitySmaller(int indexCapacity, float threshold);
-		
+		static Army load(std::istream& in);	
 };
 
 //Shift operator overloading, printing the unit in the output stream.

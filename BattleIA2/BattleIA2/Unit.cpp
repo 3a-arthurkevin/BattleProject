@@ -282,7 +282,7 @@ std::unique_ptr<Action> Unit::getAction(Army& a, Army& o)
 		return _rootNode->get(*this, a, o);
 	else
 	{
-		std::cout << "Error - Root Node Empty" << std::endl;
+		//std::cout << "Error - Root Node Empty" << std::endl;
 		return std::unique_ptr<Action>(new EmptyAction(*this));
 	}
 }

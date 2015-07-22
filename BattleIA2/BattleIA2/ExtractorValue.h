@@ -5,10 +5,6 @@
 
 #include "Extractor.h"
 
-//#include "ExtractorUnit.h"
-//#include "ExtractorArmy.h"
-//#include "ExtractorPoint.h"
-
 class ExtractorValue : public Extractor<float>
 {
 	private:
@@ -67,11 +63,11 @@ class ExtractorDistanceUnitPointValue : public Extractor<float>
 class ExtractorMaxCxArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMaxCxArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity)
+		ExtractorMaxCxArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, int indexCapacity)
 			: _indexCapacity(indexCapacity)
 		{
 			_eArmy = std::move(eArmy);
@@ -86,11 +82,11 @@ class ExtractorMaxCxArmyValue : public Extractor<float>
 class ExtractorMinCxArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorMinCxArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity) 
+		ExtractorMinCxArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, int indexCapacity) 
 			: _indexCapacity(indexCapacity)
 		{
 			_eArmy = std::move(eArmy);
@@ -105,11 +101,11 @@ class ExtractorMinCxArmyValue : public Extractor<float>
 class ExtractorAvgCxArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		int _indexCapacity;
 
 	public:
-		ExtractorAvgCxArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, int indexCapacity) 
+		ExtractorAvgCxArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, int indexCapacity) 
 			: _indexCapacity(indexCapacity)
 		{
 			_eArmy = std::move(eArmy);
@@ -127,11 +123,11 @@ class ExtractorAvgCxArmyValue : public Extractor<float>
 class ExtractorMaxDistancePointArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMaxDistancePointArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorMaxDistancePointArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
 		{ 
 			_eArmy = std::move(eArmy); 
 			_ePoint = std::move(ePoint);
@@ -148,11 +144,11 @@ class ExtractorMaxDistancePointArmyValue : public Extractor<float>
 class ExtractorMinDistancePointArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorMinDistancePointArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorMinDistancePointArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
 		{
 			_eArmy = std::move(eArmy);
 			_ePoint = std::move(ePoint);
@@ -169,11 +165,11 @@ class ExtractorMinDistancePointArmyValue : public Extractor<float>
 class ExtractorAvgDistancePointArmyValue : public Extractor<float>
 {
 	private:
-		std::unique_ptr< Extractor<Army> > _eArmy;
+		std::unique_ptr< Extractor<SetUnit> > _eArmy;
 		std::unique_ptr< Extractor<Point> > _ePoint;
 
 	public:
-		ExtractorAvgDistancePointArmyValue(std::unique_ptr< Extractor<Army> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
+		ExtractorAvgDistancePointArmyValue(std::unique_ptr< Extractor<SetUnit> >& eArmy, std::unique_ptr< Extractor<Point> >& ePoint)
 		{
 			_eArmy = std::move(eArmy);
 			_ePoint = std::move(ePoint);

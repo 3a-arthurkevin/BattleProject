@@ -29,6 +29,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 			{
 				int indexCapacity;
 				aiCode >> indexCapacity;
+
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
 					std::unique_ptr<Extractor<Unit&>> exUnit = std::unique_ptr<Extractor<Unit&>> (getUnitExtractor(aiCode));
@@ -55,7 +56,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				aiCode >> c;
 				if (c == 'D')
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
@@ -65,7 +66,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMaxCxArmyValue(exArmy, indexCapacity));
@@ -78,7 +79,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				aiCode >> c;
 				if (c == 'D')
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
@@ -88,7 +89,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
 						(new ExtractorMinCxArmyValue(exArmy, indexCapacity));
@@ -102,7 +103,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				aiCode >> c;
 				if (c == 'D')
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
@@ -112,7 +113,7 @@ std::unique_ptr<Extractor<float>> ExtractorFactory::getValueExtractor(std::strin
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<float> >
 						(new ExtractorAvgCxArmyValue(exArmy, indexCapacity));
@@ -156,7 +157,7 @@ std::unique_ptr<Extractor<Unit&>> ExtractorFactory::getUnitExtractor(std::string
 				aiCode >> c;
 				if (c == 'D')
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<Unit&> >
@@ -166,7 +167,7 @@ std::unique_ptr<Extractor<Unit&>> ExtractorFactory::getUnitExtractor(std::string
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<Unit&> >
 						(new ExtractorMinCxArmyUnit(exArmy, indexCapacity));
@@ -181,7 +182,7 @@ std::unique_ptr<Extractor<Unit&>> ExtractorFactory::getUnitExtractor(std::string
 
 				if (c == 'D')
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<Unit&> >
@@ -191,7 +192,7 @@ std::unique_ptr<Extractor<Unit&>> ExtractorFactory::getUnitExtractor(std::string
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 					return std::unique_ptr < Extractor<Unit&> >
 						(new ExtractorMaxCxArmyUnit(exArmy, indexCapacity));
@@ -225,7 +226,7 @@ std::unique_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::strin
 			//Case B<Set>
 			case 'B':
 			{
-				std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+				std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
 				return std::unique_ptr < Extractor<Point> >
 					(new ExtractorCentroidArmyPoint(exArmy));
@@ -258,7 +259,7 @@ std::unique_ptr<Extractor<Point>> ExtractorFactory::getPointExtractor(std::strin
 	}
 }
 
-std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::stringstream& aiCode)
+std::unique_ptr<Extractor<SetUnit>> ExtractorFactory::getArmyExtractor(std::stringstream& aiCode)
 {
 	aiCode.exceptions(std::stringstream::eofbit | std::stringstream::failbit | std::stringstream::badbit);
 	try
@@ -267,12 +268,12 @@ std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 		aiCode >> c;
 		if(c ==  'A')
 		{
-			return std::unique_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<SetUnit> >
 				(new ExtractorArmyA());
 		}
 		else if (c == 'O')
 		{
-			return std::unique_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<SetUnit> >
 				(new ExtractorArmyO());
 		}
 		else if (c == 'T')
@@ -285,9 +286,9 @@ std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
 					std::unique_ptr<Extractor<float>> exValue = std::unique_ptr<Extractor<float>>(getValueExtractor(aiCode));
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army>>
+					return std::unique_ptr < Extractor<SetUnit>>
 						(new ExtractorTCxSmallerValueSetArmy(indexCapacity, exValue, exArmy));
 				}
 			}
@@ -298,14 +299,14 @@ std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
 					std::unique_ptr<Extractor<float>> exValue = std::unique_ptr<Extractor<float>>(getValueExtractor(aiCode));
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army>>
+					return std::unique_ptr < Extractor<SetUnit>>
 						(new ExtractorTCxGreaterValueSetArmy(indexCapacity, exValue, exArmy));
 				}
 			}
 
-			return std::unique_ptr < Extractor<Army> >
+			return std::unique_ptr < Extractor<SetUnit> >
 				(new ExtractorArmyO());
 		}
 
@@ -319,18 +320,18 @@ std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				if (c == 'D')
 				{
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<SetUnit> >
 						(new ExtractorNMinDistancePointSetArmy(nbElement, exPoint, exArmy));
 				}
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<SetUnit> >
 						(new ExtractorNMinCxSetArmy(nbElement, indexCapacity, exArmy));
 				}
 			}
@@ -340,30 +341,30 @@ std::unique_ptr<Extractor<Army>> ExtractorFactory::getArmyExtractor(std::strings
 				if (c == 'D')
 				{
 					std::unique_ptr<Extractor<Point>> exPoint = std::unique_ptr<Extractor<Point>>(getPointExtractor(aiCode));
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<SetUnit> >
 						(new ExtractorNMaxDistancePointSetArmy(nbElement, exPoint, exArmy));
 				}
 
 				int indexCapacity = c - '0';
 				if (indexCapacity >= 0 && indexCapacity <= 6)
 				{
-					std::unique_ptr<Extractor<Army>> exArmy = std::unique_ptr<Extractor<Army>>(getArmyExtractor(aiCode));
+					std::unique_ptr<Extractor<SetUnit>> exArmy = std::unique_ptr<Extractor<SetUnit>>(getArmyExtractor(aiCode));
 
-					return std::unique_ptr < Extractor<Army> >
+					return std::unique_ptr < Extractor<SetUnit> >
 						(new ExtractorNMaxCxSetArmy(nbElement, indexCapacity, exArmy));
 				}
 			}
 		}
 
-		return std::unique_ptr < Extractor<Army> >
+		return std::unique_ptr < Extractor<SetUnit> >
 			(new ExtractorArmyO());
 	}
 	catch (...)
 	{
 		std::cout << "Erreur dans la Factory Extractor Army" << std::endl;
-		return std::unique_ptr < Extractor<Army> >
+		return std::unique_ptr < Extractor<SetUnit> >
 			(new ExtractorArmyO());
 	}
 }
